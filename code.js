@@ -1,4 +1,4 @@
-const urlBase = 'http://127.0.0.1:5050/LAMPAPI';
+const urlBase = 'http://localhost:80/COP4331_Group6_SmallProject';
 const extension = 'php';
 
 let userId = 0;
