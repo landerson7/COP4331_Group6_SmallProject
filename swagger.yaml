@@ -1,0 +1,131 @@
+swagger: '2.0'
+info:
+  description: This is the API documentation for the COP 4331 Small Project Contact Manager
+  version: 1.0.0
+  title: Contact Manager
+  # contact info for API team
+  contact:
+    email: lu097697@ucf.edu
+    email: pr438045@ucf.edu
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+  /Login.php:
+    post:
+      tags:
+      - Users
+      summary: Logs in to the contact manager
+      operationId: dlLogin
+      description: Logs in to the contact manager
+      consumes:
+      - applicatoin/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: loginItem
+        description: Login
+        schema:
+          $ref: '#/definitions/Login'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+  /AddColor.php:
+    post:
+      tags:
+      - Colors
+      summary: Adds a color
+      operationId: addColor
+      description: Adds a color to the color app database
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: colorItem
+        description: Color
+        schema:
+          $ref: '#/definitions/Color'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found 
+        500:
+          description: Server Error
+  /SearchColors.php:
+    post:
+      tags:
+      - Search
+      summary: Searches colors
+      operationId: searchColor
+      description: Searches colors from the color app database
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: searchItem
+        description: Color Search
+        schema:
+          $ref: '#/definitions/Search'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+          
+definitions:
+  Login:
+    type: object
+    required:
+    - login
+    - password
+    properties:
+      login:
+        type: string
+        example: "fred"
+      password:
+        type: string
+        example: "secret"
+  Color:
+    type: object
+    required:
+    - userId
+    - color
+    properties:
+      userId:
+        type: integer
+        example: 1
+      color:
+        type: string
+        example: "Blue Green"
+  Search:
+    type: object
+    required:
+    - userId
+    - search
+    properties:
+      userId:
+        type: integer
+        example: 1
+      search:
+        type: string
+        example: "bl"
+
+
+host: COP4331-5.com
+basePath: /LAMPAPI
+schemes:
+- http
