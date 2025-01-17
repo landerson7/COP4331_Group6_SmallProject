@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Style Document */
+
+/* Reset Body Margin and Height */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+	
+	background-image: url("../images/cartoon_beach.png");
+	
+}
+
+/* Main Container */
+.container {
+	/* Make a 50% Square*/
+    width: 50vw;
+    height: 40vw; 
+	
+	/* Make Dimensions of 50%*/
+    max-height: 50vh;
+    max-width: 40vw;
+	
+	/* Box Attributes */
+    background-color: lightblue;
+    border: 1px solid #ccc;
+	border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+	
+	/* Centering Content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	
+}
+
+/* Form styling */
+.form {
+    display: flex;
+	
+	 /* Stack items vertically */
+    flex-direction: column;
+	
+	 /* Adjust width of form relative to container */
+    width: 80%;
+    text-align: center;
+	
+}
+
+/* Login Header styling */
+.login-header {
+	/* Space below the login header */
+    margin-bottom: 15px;
+}
+
+.login-prompt {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.error-message {
+    font-size: 0.9rem;
+    color: red;
+    margin: 5px 0 0;
+	
+	 /* Default hidden - Swap to content with JS to show*/
+    display: none;
+}
+
+/* Input box styling */
+.input-box {
+	
+	/* Space between input boxes */
+    margin: 10px 0; 
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	
+	/* Make the inputs fill the form width */
+    width: 100%; 
+	
+	/* Include padding in width calculation */
+    box-sizing: border-box; 
+}
+
+/* Button row styling */
+.button-row {
+    display: flex;
+	
+	/* Space out the buttons */
+    justify-content: space-between;
+	
+	/* Space between buttons and inputs */
+    margin-top: 15px; 
+}
+
+/* Button styling */
+.btn {
+	
+	/* Attributes */
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+	
+	/* Make buttons grow equally */
+    flex: 1; 
+    margin: 0 5px;
+	
+	 /* Space between buttons */
+    box-sizing: border-box;
+}
+
+.btn:hover {
+	
+	/* Darker shade on hover */
+    background-color: #0056b3; 
+}
