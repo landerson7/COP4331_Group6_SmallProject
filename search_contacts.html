@@ -2,35 +2,32 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Front Login Page</title>
+<title>Search Contacts Page</title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 	
-	<!--Main Container Class Start-->
-	<div class="container">
+	<!--Search and Add Container Class Start-->
+	<!--Add button, search bar, and space for a list of entries to be displayed.-->
+	<div class="container" id="left-container">
+		<p>Add or search for contacts</p>
+		
+		<button type="submit" class="btn search_contacts-btn" id="create-btn">Create contact</button>
+		
+	</div>
 	
-		<!--Input Form-->
-		<form class="form">
-			
-			<!--Login Form Header-->
-			<div class="login-header">
-				<h2>COP4331 - Contact Manager - Team 21</h2>
-                <h2 class="login-prompt">Search Contacts</h2>
-                <p class="error-message" id="error-message"></p>
-            </div>
-			
-			<!--Username & Password-->
-			<div class="button-row">
-				<input type="text" placeholder="Username" class="input-box" id="username">
-				<input type="password" placeholder="Password" class="input-box" id="password">
-            </div>
-			
-        </form>
+	<!--Display Container Class Start-->
+	<!--Display one contact to be created, updated, read, or deleted. -->
+	<div class="container" id="right-container">
+		<p>Edit or delete contacts</p>
+		
+		<button type="submit" class="btn search_contacts-btn" id="update-btn">Edit contact</button>
+		<button type="submit" class="btn search_contacts-btn" id="delete-btn">Delete contact</button>
+		
 	</div>
 	
 	<!--JavaScript-->
-	<script src="javascript/login.js"></script>
+	<script src="javascript/search_contacts.js"></script>
 </body>
 </html>
