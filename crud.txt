@@ -1,0 +1,5 @@
+Create -> INSERT INTO
+Read -> SELECT * FROM LIKE
+Update -> UPDATE
+Delete -> DELETE
+CRUD ->  SQL Query
