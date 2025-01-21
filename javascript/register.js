@@ -34,16 +34,18 @@ registerButton.addEventListener('click', () => {
 	//Username & Password Given - Validate Record
     	//Waiting on API
 	//Search for record
-		//Record found
+		//Record found (username found)
 //		if (record_found) {
-			//Go to contacts page
-			// window.location.href = './search_contacts.html';
+			// const errorMessage = document.getElementById('error-message');
+		 	// errorMessage.textContent = 'Username already taken.';
+			// errorMessage.style.display = 'block'; //Show error
+			
 //		}
 		//Record not found
 //		if (!record_found) {
-	//		const errorMessage = document.getElementById('error-message');
-	//	 	errorMessage.textContent = 'Incorrect username or password.';
-	//      errorMessage.style.display = 'block'; //Show error
+			// Save entry
+			//Go to contacts page
+			// window.location.href = './search_contacts.html';
 //		}
 
 
