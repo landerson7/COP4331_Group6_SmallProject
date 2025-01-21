@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Front Register Page</title>
+<link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	
+	<!--Main Container Class Start-->
+	<div class="container">
+	
+		<!--Input Form-->
+		<form class="form">
+			
+			<!--Register Form Header-->
+			<div class="register-header">
+				<h2>COP4331 - Contact Manager - Team 6</h2>
+                <h2 class="register-prompt">Register</h2>
+                <p class="error-message" id="error-message"></p>
+            </div>
+			
+			<!--Username & Password-->
+            <input type="text" placeholder="Username" class="input-box" id="username">
+            <input type="password" placeholder="Password" class="input-box" id="password">
+            
+			<!--Login & Register Buttons-->
+			<div class="button-row">
+                <button type="submit" class="btn" id="login-btn">Login</button>
+                <button type="button" class="btn" id="register-btn">Register</button>
+            </div>
+			
+        </form>
+	</div>
+	
+	<!--JavaScript-->
+	<script src="javascript/register.js"></script>
+</body>
+</html>

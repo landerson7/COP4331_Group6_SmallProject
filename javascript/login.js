@@ -31,6 +31,7 @@ loginButton.addEventListener('click', () => {
 		//Record found
 //		if (record_found) {
 			//Go to contacts page
+			// window.location.href = './search_contacts.html';
 //		}
 		//Record not found
 //		if (!record_found) {
@@ -39,11 +40,10 @@ loginButton.addEventListener('click', () => {
 	//      errorMessage.style.display = 'block'; //Show error
 //		}
 	
-	
 });
 
 //Register Button Listener
 registerButton.addEventListener('click', () => {
     //Redirect to registration page
-    window.location.href = '/register'; //Replace with URL for Register Page
+    window.location.href = './register.html';
 });
