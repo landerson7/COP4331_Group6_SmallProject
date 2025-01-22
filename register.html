@@ -7,34 +7,35 @@
 </head>
 
 <body>
-	
-	<!--Main Container Class Start-->
-	<div class="container">
-	
-		<!--Input Form-->
-		<form class="form">
-			
-			<!--Register Form Header-->
-			<div class="register-header">
-				<h2>COP4331 - Contact Manager - Team 6</h2>
+    
+    <!--Main Container Class Start-->
+    <div class="container">
+    
+        <!--Input Form-->
+        <form class="form">
+            
+            <!--Register Form Header-->
+            <div class="register-header">
+                <h2>COP4331 - Contact Manager - Team 6</h2>
                 <h2 class="register-prompt">Register</h2>
                 <p class="error-message" id="error-message"></p>
             </div>
-			
-			<!--Username & Password-->
+            
+            <!--First Name & Last Name-->
+            <input type="text" placeholder="First Name" class="input-box" id="first-name">
+            <input type="text" placeholder="Last Name" class="input-box" id="last-name">
+            
+            <!--Username & Password-->
             <input type="text" placeholder="Username" class="input-box" id="username">
             <input type="password" placeholder="Password" class="input-box" id="password">
             
-			<!--Login & Register Buttons-->
-			<div class="button-row">
-                <button type="submit" class="btn" id="login-btn">Login</button>
-                <button type="button" class="btn" id="register-btn">Register</button>
-            </div>
-			
+            <!--Register Button-->
+            <button type="submit" class="btn" id="register-btn">Register</button>
+            
         </form>
-	</div>
-	
-	<!--JavaScript-->
-	<script src="javascript/register.js"></script>
+    </div>
+    
+    <!--JavaScript-->
+    <script src="javascript/register.js"></script>
 </body>
 </html>
