@@ -4,42 +4,52 @@
 const form = document.querySelector('.form');
 form.addEventListener('submit', (e) => {
     e.preventDefault(); // Prevent the form from refreshing the page
-});
 
-//References to Buttons
-const loginButton = document.getElementById('login-btn');
-const registerButton = document.getElementById('register-btn');
+    // Collect Username & Password
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-//Login Button Listener
-loginButton.addEventListener('click', () => {
-	
-	//Collect Username & Password
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-	
-    //Username / Password Blank
+    // Reference to Error Message
+    const errorMessage = document.getElementById('error-message');
+
+    // Username / Password Blank
     if (username === '' || password === '') {
-        const errorMessage = document.getElementById('error-message');
-		errorMessage.textContent = 'Please enter both username and password.';
-        errorMessage.style.display = 'block'; //Show error
-        
+        errorMessage.textContent = 'Please enter both username and password.';
+        errorMessage.style.display = 'block'; // Show error
+        return;
     }
-	
-	//Username & Password Given - Validate Record
-    	//Waiting on API
-	//Search for record
-		//Record found
-//		if (record_found) {
-			//Go to contacts page
-			// window.location.href = './search_contacts.html';
-//		}
-		//Record not found
-//		if (!record_found) {
-	//		const errorMessage = document.getElementById('error-message');
-	//	 	errorMessage.textContent = 'Incorrect username or password.';
-	//      errorMessage.style.display = 'block'; //Show error
-//		}
-	
+
+    // Hide previous error messages
+    errorMessage.style.display = 'none';
+
+    // Make API Call to login.php
+    fetch('login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            login: username,
+            password: password,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.error) {
+                // Display error from server
+                errorMessage.textContent = data.error;
+                errorMessage.style.display = 'block'; // Show error
+            } else {
+                // Redirect to contacts page on success
+                window.location.href = './search_contacts.html';
+            }
+        })
+        .catch((error) => {
+            // Handle network errors
+            errorMessage.textContent = 'An error occurred. Please try again later.';
+            errorMessage.style.display = 'block'; // Show error
+            console.error('Error:', error);
+        });
 });
 
 //Register Button Listener
