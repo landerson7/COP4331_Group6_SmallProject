@@ -113,3 +113,7 @@ function doSignup()
 	}
 
 }
+
+// function doCreateContact() {}
+
+// function doDeleteContact() {}
