@@ -15,26 +15,9 @@
 	else
 	{	 //prepare statements are better for security, no worries of injections
         $hashedPassword = hash('md5', $inData["password"]);
-		$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password)
-            SELECT data.FirstName, data.LastName, data.Login, data.Password
-            FROM
-            (
-                SELECT ? AS FirstName, ? AS LastName, ? AS Login, ? AS Password
-                UNION ALL
-                SELECT ? AS FirstName, ? AS LastName, ? AS Login, ? AS Password
-            ) AS data
-            WHERE NOT EXISTS 
-            (
-                SELECT 1 
-                FROM Users u 
-                WHERE u.Login = data.login
-            )
-                                ");
+		$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES(?, ?, ?, ?)");       
 
-        $stmt->bind_param(
-            "ssssssss", $inData["firstName"], $inData["lastName"], $inData["username"], $inData["password"], 
-                        $inData["firstName"], $inData["lastName"], $inData["username"], $hashedPassword
-        );
+        $stmt->bind_param("ssss", $inData["firstName"], $inData["lastName"], $inData["username"], $hashedPassword);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
