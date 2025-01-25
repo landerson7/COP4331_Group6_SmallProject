@@ -10,28 +10,36 @@
     
     <!--Main Container Class Start-->
     <div class="container">
-    
         <!--Input Form-->
         <form class="form">
-            
             <!--Register Form Header-->
             <div class="register-header">
                 <h2>COP4331 - Contact Manager - Team 6</h2>
                 <h2 class="register-prompt">Register</h2>
                 <p class="error-message" id="error-message"></p>
             </div>
-            
-            <!--First Name & Last Name-->
-            <input type="text" placeholder="First Name" class="input-box" id="first-name">
-            <input type="text" placeholder="Last Name" class="input-box" id="last-name">
-            
-            <!--Username & Password-->
+
+            <!--First Name & Last Name in the same row-->
+            <div style="display: flex; gap: 10px;">
+                <input type="text" placeholder="First Name" class="input-box" id="first-name">
+                <input type="text" placeholder="Last Name" class="input-box" id="last-name">
+            </div>
+
+            <!--Username-->
             <input type="text" placeholder="Username" class="input-box" id="username">
+
+            <!--Password-->
             <input type="password" placeholder="Password" class="input-box" id="password">
-            
+
+            <!--Password Requirements-->
+            <div id="password-requirements" style="font-size: 0.9rem; margin-top: 5px;">
+                <div id="length-req" style="color: red;">&#10060; At least 8 Characters Long</div>
+                <div id="capital-req" style="color: red;">&#10060; At least 1 Capital Letter</div>
+                <div id="special-req" style="color: red;">&#10060; At least 1 Special Character</div>
+            </div>
+
             <!--Register Button-->
-            <button type="submit" class="btn" id="register-btn">Register</button>
-            
+            <button type="button" class="btn" id="register-btn">Register</button>
         </form>
     </div>
     
