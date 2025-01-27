@@ -1,36 +1,53 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Front Login Page</title>
-<link href="style/style.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Contacts</title>
+  <link href="style/contacts_style.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-	
-	<!--Main Container Class Start-->
-	<div class="container">
-	
-		<!--Input Form-->
-		<form class="form">
-			
-			<!--Login Form Header-->
-			<div class="login-header">
-				<h2>COP4331 - Contact Manager - Team 21</h2>
-                <h2 class="login-prompt">Search Contacts</h2>
-                <p class="error-message" id="error-message"></p>
-            </div>
-			
-			<!--Username & Password-->
-			<div class="button-row">
-				<input type="text" placeholder="Username" class="input-box" id="username">
-				<input type="password" placeholder="Password" class="input-box" id="password">
-            </div>
-			
-        </form>
-	</div>
-	
-	<!--JavaScript-->
-	<script src="javascript/code.js"></script>
+  <div class="contacts-table">
+    <!-- Top Row -->
+    <div>
+      <div style="border-right: 3px solid black;" class="contacts-cell top-cell">
+        <div class="search-container">
+			<button class="search-btn" id="search-btn">Search</button>
+          	<input type="text" class="search-box" id="search-box" placeholder="Search contacts...">
+        </div>
+      </div>
+      <div style="border-left: 3px solid black;" class="contacts-cell top-cell" id="contact-name">Contact Name</div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div>
+      <div style="border-right: 3px solid black;" class="contacts-cell bottom-cell" id="contact-results">
+        <!-- Dynamically populate search results here -->
+      </div>
+      <div style="border-left: 3px solid black;" class="contacts-cell bottom-cell">
+        <div class="contact-info">
+          <label style="padding-top: 0px;" for="first-name">First Name</label>
+          <input type="text" id="first-name">
+
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name">
+
+          <label for="phone-number">Phone Number</label>
+          <input type="text" id="phone-number">
+
+          <label for="email">Email</label>
+          <input type="email" id="email">
+
+          <div class="button-row">
+            <button class="btn btn-update" id="update-btn">Update</button>
+            <button class="btn btn-delete" id="delete-btn">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--JavaScript-->
+  <script src="javascript/search_contacts.js"></script>
 </body>
 </html>

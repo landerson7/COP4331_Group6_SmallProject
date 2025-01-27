@@ -1,0 +1,139 @@
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	font-size: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-image: url("../images/cartoon_beach.png");
+	background-size: cover; /* Ensures the image covers the entire viewport */
+  	background-repeat: no-repeat; /* Prevents the image from repeating */
+ 	background-position: center; /* Centers the image */
+}
+
+.contacts-table {
+	width: 60%;
+	height: 60%;
+	display: table;
+	border-collapse: collapse;
+	table-layout: fixed;
+/*	border: 2px solid #ccc;*/
+	
+	background-color: lightblue;
+/*    border: 1px solid #ccc;*/
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.contacts-table > div {
+	display: table-row;
+	border-radius: 20px;
+}
+
+.contacts-cell {
+	display: table-cell;
+	border-radius: 20px;
+	padding: 10px;
+	vertical-align: middle; /* Center vertically */
+	text-align: center; /* Center horizontally */
+}
+
+.top-cell {
+	height: 20%;
+	font-weight: bold;
+	border-radius: 20px;
+	border-bottom: 3px solid black;
+/*	background-color: #e9ecef;*/
+}
+
+.bottom-cell {
+	height: 80%;
+	border-radius: 20px;
+	border-top: 3px solid black;
+/*	background-color: #ffffff;*/
+}
+
+.search-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.search-box {
+	width: 80%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center; /* Center text in search box */
+}
+
+.contact-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.contact-info label {
+	margin-top: 10px;
+	font-weight: bold;
+	padding-top: 30px;
+}
+
+.contact-info input {
+	margin-top: 5px;
+	padding: 10px;
+	width: 90%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center; /* Center text in input fields */
+}
+
+.button-row {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center; /* Center buttons */
+}
+
+.btn {
+	padding: 10% 20%;
+	margin: 5px;
+	font-size: 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.search-btn {
+	padding: 10px 20px;
+	margin-right: 10px;
+	font-size: 1rem;
+	border: none;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+}
+
+.search-btn:hover {
+	background-color: #0056b3;
+}
+
+.btn-update {
+	background-color: #007bff;
+	color: white;
+}
+
+.btn-update:hover {
+	background-color: #0056b3;
+}
+
+.btn-delete {
+	background-color: #007bff;
+	color: white;
+}
+
+.btn-delete:hover {
+	background-color: #0056b3;
+}

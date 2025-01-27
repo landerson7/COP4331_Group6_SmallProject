@@ -16,25 +16,26 @@ body {
 
 /* Main Container */
 .container {
-	/* Make a 50% Square*/
+    /* Removed fixed height and width */
     width: 50vw;
-    height: 40vw; 
-	
-	/* Make Dimensions of 50%*/
-    max-height: 50vh;
     max-width: 40vw;
-	
-	/* Box Attributes */
+    padding: 20px; /* Add padding for better spacing */
+
+    /* Box Attributes */
     background-color: lightblue;
     border: 1px solid #ccc;
-	border-radius: 20px;
+    border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-	
-	/* Centering Content */
+
+    /* Centering Content */
     display: flex;
     align-items: center;
     justify-content: center;
-	
+
+    /* Automatically adjust height based on content */
+    min-height: 50vh; /* Minimum height for login page */
+    max-height: auto; /* Remove fixed height limitation */
+    box-sizing: border-box;
 }
 
 /* Form styling */
@@ -124,4 +125,17 @@ body {
 	
 	/* Darker shade on hover */
     background-color: #0056b3; 
+}
+
+/* Register Link Styling */
+.register-link {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register-link:hover {
+    color: #0056b3;
 }
