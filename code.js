@@ -117,3 +117,5 @@ function doSignup()
 // function doCreateContact() {}
 
 // function doDeleteContact() {}
+
+// function doUpdateContact() {}
