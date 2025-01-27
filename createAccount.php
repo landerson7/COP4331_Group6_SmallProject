@@ -14,22 +14,38 @@
 	}
 	else
 	{	 //prepare statements are better for security, no worries of injections
-        $hashedPassword = hash('md5', $inData["password"]); //hash password with md5 hash func
-		$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES(?, ?, ?, ?)");       
-
-        $stmt->bind_param("ssss", $inData["firstName"], $inData["lastName"], $inData["username"], $hashedPassword);
+		$stmt = $conn->prepare("SELECT * FROM Users WHERE Login=?"); //checking for unique username
+		$stmt->bind_param("s", $inData["username"]); 
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if( $stmt->affected_rows > 0) //if query successful
+		if( $stmt->affected_rows > 0) //if user exists
 		{
-			returnWithInfo( $inData["firstName"], $inData["lastName"], $conn->insert_id );
+			returnWithError("User already exists");
 
 		}
-		else //failed
+		else //user does not exist
 		{
-			returnWithError("User already exists or insertion error");
+			
+			$hashedPassword = hash('md5', $inData["password"]); //hash password with md5 hash func
+			$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES(?, ?, ?, ?)");       
+
+			$stmt->bind_param("ssss", $inData["firstName"], $inData["lastName"], $inData["username"], $hashedPassword);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
+			if( $stmt->affected_rows > 0) //if query successful
+			{
+				returnWithInfo( $inData["firstName"], $inData["lastName"], $conn->insert_id );
+
+			}
+			else //failed
+			{
+				returnWithError("Insertion error");
+			}
 		}
+
+        
 
 		$stmt->close();
 		$conn->close();
