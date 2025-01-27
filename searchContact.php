@@ -1,9 +1,9 @@
 <?php
 
     $inData = getRequestInfo();
-
+    //parse userID and firstName from input
     $userId = $inData["userId"];
-    $inData["firstName"] = $inData["firstName"] . '%';
+    $inData["firstName"] = $inData["firstName"] . '%'; // <-- this character is used to format the search query
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
     if ($conn->connect_error) 
@@ -12,15 +12,15 @@
     } 
     else 
     {
-        //insert contact into database
+        //search contact from database
         $stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE ? AND UserID =?");
         $stmt->bind_param("si", $inData["firstName"], $userId);
 
-        if ($stmt->execute()) 
+        if ($stmt->execute()) //if success
         {
             $result = $stmt->get_result();
             $contacts = array();
-            while ($row = $result->fetch_assoc()) 
+            while ($row = $result->fetch_assoc()) // scan rows of results and add to contacts array
             {
                 $contacts[] = array("ID" => $row["ID"], "FirstName" => $row["FirstName"], "LastName" => $row["LastName"], "Phone" => $row["Phone"], "Email" => $row["Email"]);
             } 
@@ -28,13 +28,13 @@
             {
                 sendResultInfoAsJson(json_encode($contacts));
             }
-            else
+            else //no contacts found, rows = 0
             {
                 returnWithError("No matching contacts found");
             }
             
         } 
-        else 
+        else //error searching
         {
             returnWithError("Error searching contacts: " . $stmt->error);
         }

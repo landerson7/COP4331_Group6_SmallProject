@@ -14,19 +14,19 @@
 	}
 	else
 	{	 //prepare statements are better for security, no worries of injections
-        $hashedPassword = hash('md5', $inData["password"]);
+        $hashedPassword = hash('md5', $inData["password"]); //hash password with md5 hash func
 		$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES(?, ?, ?, ?)");       
 
         $stmt->bind_param("ssss", $inData["firstName"], $inData["lastName"], $inData["username"], $hashedPassword);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if( $stmt->affected_rows > 0)
+		if( $stmt->affected_rows > 0) //if query successful
 		{
 			returnWithInfo( $inData["firstName"], $inData["lastName"], $conn->insert_id );
 
 		}
-		else
+		else //failed
 		{
 			returnWithError("User already exists or insertion error");
 		}
