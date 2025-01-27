@@ -14,14 +14,21 @@
 	}
 	else
 	{	 //prepare statements are better for security, no worries of injections
-		$stmt = $conn->prepare("SELECT ID,FirstName,LastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]); //password is being hashed on JavaScript side
+		$stmt = $conn->prepare("SELECT ID,FirstName,LastName,Password FROM Users WHERE Login=?");
+		$stmt->bind_param("s", $inData["login"]); //password being hashed on javascript side
 		$stmt->execute();
 		$result = $stmt->get_result();
 
 		if( $row = $result->fetch_assoc()  ) //if query successful
 		{
-			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
+			if (hash('md5', $inData["password"]) === $row['Password'])
+			{
+				returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
+			}
+			else
+			{
+				returnWithError("Invalid username or password")
+			}
 		}
 		else //no login found
 		{
