@@ -23,7 +23,7 @@ form.addEventListener('submit', (e) => {
     errorMessage.style.display = 'none';
 
     // Make API Call to login.php
-    fetch('login.php', {
+    fetch('../php/login.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
