@@ -4,6 +4,8 @@
 
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
+	$email = $inData["email"];
+	$phone = $inData["phone"];
 	$userId = $inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -14,8 +16,8 @@
 	else 
 	{
 		//delete calls from just the first/last names
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName=? AND LastName=? AND UserID=?");
-		$stmt->bind_param("ssi", $firstName, $lastName, $userId);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName=? AND LastName=? AND Phone=? AND Email=? AND UserID=?");
+		$stmt->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
 		$stmt->execute();
 
 		if ($stmt->affected_rows > 0) 
