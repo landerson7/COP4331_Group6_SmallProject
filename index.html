@@ -1,10 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <title>Home</title>
+<meta charset="utf-8">
+<title>Front Login Page</title>
+<link href="style/style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-    <h1>Home</h1>
-    <p>Welcome to the home page.</p>
-    <p><a href="about.php">About</a></p>
+	
+	<!--Main Container Class Start-->
+	<div class="container">
+	
+		<!--Input Form-->
+		<form class="form">
+			
+			<!--Login Form Header-->
+			<div class="login-header">
+				<h2>COP4331 - Contact Manager - Team 21</h2>
+                <h2 class="login-prompt">Login</h2>
+                <p class="error-message" id="error-message"></p>
+            </div>
+			
+			<!--Username & Password-->
+            <input type="text" placeholder="Username" class="input-box" id="username">
+            <input type="password" placeholder="Password" class="input-box" id="password">
+            
+			<!--Login & Register Buttons-->
+			<div class="button-row">
+                <button type="submit" class="btn" id="login-btn">Login</button>
+                <button type="button" class="btn" id="register-btn">Register</button>
+            </div>
+			
+        </form>
+	</div>
+	
+	<!--JavaScript-->
+	<script src="javascript/login.js"></script>
+</body>
 </html>
