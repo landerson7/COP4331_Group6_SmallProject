@@ -1,0 +1,44 @@
+.home-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	/* Removed fixed height and width */
+    width: 50vw;
+    max-width: 40vw;
+    padding: 20px; /* Add padding for better spacing */
+	
+	/* Automatically adjust height based on content */
+    min-height: 50vh; /* Minimum height for login page */
+    max-height: auto; /* Remove fixed height limitation */
+    box-sizing: border-box;
+}
+
+/* Button styling */
+.btn {
+	
+	/* Attributes */
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+	
+	/* Make buttons grow equally */
+    /* flex: 1;  */
+    /* margin: 0 5px; */
+	margin-top: 15px;	
+	
+	 /* Space between buttons */
+    box-sizing: border-box;
+}
+
+.btn:hover {
+	
+	/* Darker shade on hover */
+    background-color: #0056b3; 
+}
