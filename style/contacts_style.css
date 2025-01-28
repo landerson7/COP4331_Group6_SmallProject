@@ -149,9 +149,10 @@ body {
 	color: white;
 	cursor: pointer;
 	
-	position: relative;
-	left: 10%;
-	top: 45%;
+	/* position: relative; */
+	position: fixed;
+	right: 0%;
+	bottom: 0%;
 }
 
 .btn-logout:hover {
