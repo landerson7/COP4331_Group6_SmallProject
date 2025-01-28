@@ -23,7 +23,7 @@ form.addEventListener('submit', (e) => {
     errorMessage.style.display = 'none';
 
     // Make API Call to login.php
-    fetch('../php/login.php', {
+    fetch('./login.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -42,11 +42,13 @@ form.addEventListener('submit', (e) => {
             } else {
                 // Redirect to contacts page on success
                 window.location.href = './search_contacts.html';
+                //set local data
+                localStorage.setItem('userId', data.id);
             }
         })
         .catch((error) => {
             // Handle network errors
-            errorMessage.textContent = 'An error occurred. Please try again later.';
+            errorMessage.textContent = error.message;
             errorMessage.style.display = 'block'; // Show error
             console.error('Error:', error);
         });

@@ -1,6 +1,9 @@
 
 <?php
-
+	header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    header("Content-Type: application/json");
 	$inData = getRequestInfo();
 	//define variables
 	$id = 0;
@@ -27,7 +30,7 @@
 			}
 			else
 			{
-				returnWithError("Invalid username or password")
+				returnWithError("Invalid username or password");
 			}
 		}
 		else //no login found
