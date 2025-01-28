@@ -8,7 +8,7 @@
     $inData = getRequestInfo();
 
     // Establish a connection to the MySQL database
-    $conn = new mysqli("127.0.0.1", "TheBeast", "WeLoveCOP4331", "COP4331");
+    $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 
     // Check if the connection to the database failed
     if ($conn->connect_error) 
