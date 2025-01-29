@@ -4,41 +4,40 @@
     header("Access-Control-Allow-Headers: Content-Type, Authorization");
     header("Content-Type: application/json");
 
-    // Parse the incoming JSON request body
+    //Parse incoming JSON
     $inData = getRequestInfo();
 
-    // Establish a connection to the MySQL database
+    //Establish connection to database
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 
-    // Check if the connection to the database failed
+    //Error checking database connection
     if ($conn->connect_error) 
     {
-        // If the connection failed, return an error response
         returnWithError($conn->connect_error);
     } 
     else 
     {
-        // Extract userId and page number from the request data
+        //Extract userId and page number from data
         $userId = $inData["userId"];
-        $page = isset($inData["page"]) ? $inData["page"] : 1; // Default to page 1 if not provided
+        $page = isset($inData["page"]) ? $inData["page"] : 1; //Default to page 1 if page number not given
         
-        $limit = 5; // Number of contacts to retrieve per page
-        $offset = ($page - 1) * $limit; // Calculate the starting point for the query
+        $limit = 5; //Retreives 5 contacts per page
+        $offset = ($page - 1) * $limit; //Calculate offset based on page number
 
-        // Prepare the SQL query to fetch the contacts
+        //Prepare SQL fetch query
         $stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE UserID = ? LIMIT ? OFFSET ?");
         
-        // Bind the userId, limit, and offset to the SQL query to prevent SQL injection
+        //Bind parameters to SQL query to prevent SQL injection
         $stmt->bind_param("iii", $userId, $limit, $offset);
 
-        // Execute the prepared statement
+        //Execute prepared statement
         if ($stmt->execute()) 
         {
-            // Get the result set from the query
+            //Get the result set from the query
             $result = $stmt->get_result();
             $contacts = array();
 
-            // Loop through each row in the result set and build the contacts array
+            //Loop through rows and build contacts array
             while ($row = $result->fetch_assoc()) 
             {
                 $contacts[] = array(
@@ -50,7 +49,7 @@
                 );
             }
 
-            // If contacts were found, send them as a JSON response
+            //If contacts found send as JSON
             if (count($contacts) > 0)
             {
                 $response = array("contacts" => $contacts);
@@ -58,17 +57,17 @@
             } 
             else 
             {
-                // If no contacts were found, return an error message
+                //If no contacts found return error
                 returnWithError("No more contacts to load");
             }
         } 
         else 
         {
-            // If the query failed to execute, return an error message with details
+            //If query failed return error
             returnWithError("Error executing query: " . $stmt->error);
         }
 
-        // Close the prepared statement and database connection
+        //Close prepared statement and database connection
         $stmt->close();
         $conn->close();
     }
