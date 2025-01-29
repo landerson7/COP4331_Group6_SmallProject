@@ -166,3 +166,33 @@ body {
 .btn-logout:hover {
 	background-color: #0056b3;
 }
+
+.contact-results {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 90%;
+  }
+  
+  .pagination-container {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: auto;
+	padding: 20px;
+	border-top: 2px solid black;
+  }
+  
+  .pagination-btn {
+	padding: 8px 12px;
+	background-color: #007BFF;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+  }
+  
+  .pagination-btn:disabled {
+	background-color: #cccccc;
+	cursor: not-allowed;
+  } 
