@@ -1,131 +1,189 @@
 swagger: '2.0'
 info:
-  description: This is the API documentation for the COP 4331 Small Project Contact Manager
+  description: This is the API documentation for the COP 4331 Group 6 Spring 2025 Small Project Contact Manager
   version: 1.0.0
   title: Contact Manager
-  # contact info for API team
   contact:
     email: lu097697@ucf.edu
     email: pr438045@ucf.edu
-
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 paths:
-  /Login.php:
+  /php/login.php:
     post:
       tags:
-      - Users
-      summary: Logs in to the contact manager
-      operationId: dlLogin
-      description: Logs in to the contact manager
+        - Users
+      summary: Logs user into the contact manager
+      operationId: doLogin
+      description: Logs user into the contact manager
       consumes:
-      - applicatoin/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: loginItem
-        description: Login
-        schema:
-          $ref: '#/definitions/Login'
+        - in: body
+          name: loginItem
+          description: Login
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
       responses:
         200:
-          description: OK
+          description: Successful login
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              firstName:
+                type: string
+                example: "Sam"
+              lastName:
+                type: string
+                example: "Hill"
+              error:
+                type: string
+                example: ""
+        401:
+          description: Unauthorized - Invalid username or password
         404:
-          description: URL Not Found
+          description: No matching user found
         500:
-          description: Server Error
-  /AddColor.php:
+          description: Internal server error
+
+  /php/createAccount.php:
     post:
       tags:
-      - Colors
-      summary: Adds a color
-      operationId: addColor
-      description: Adds a color to the color app database
+        - Users
+      summary: Creates a new user account
+      operationId: createAccount
+      description: Registers a new user in the contact manager
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: colorItem
-        description: Color
-        schema:
-          $ref: '#/definitions/Color'
+        - in: body
+          name: accountItem
+          description: User account details
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAccount'
       responses:
         200:
-          description: OK
-        404:
-          description: URL Not Found 
+          description: Account successfully created
+        400:
+          description: Bad request - Missing required fields
+        409:
+          description: Conflict - User already exists
         500:
-          description: Server Error
-  /SearchColors.php:
+          description: Internal server error
+
+  /php/searchContact.php:
     post:
       tags:
-      - Search
-      summary: Searches colors
-      operationId: searchColor
-      description: Searches colors from the color app database
+        - Contacts
+      summary: Searches for contacts
+      operationId: searchContact
+      description: Searches for contacts in the database based on first and/or last name.
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: searchItem
-        description: Color Search
-        schema:
-          $ref: '#/definitions/Search'
+        - in: body
+          name: searchItem
+          description: Contact search criteria
+          required: true
+          schema:
+            $ref: '#/definitions/SearchContact'
       responses:
         200:
-          description: OK
+          description: Successful search
+          schema:
+            type: object
+            properties:
+              contacts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ID:
+                      type: integer
+                      example: 5
+                    FirstName:
+                      type: string
+                      example: "Sam"
+                    LastName:
+                      type: string
+                      example: "Hill"
+                    Phone:
+                      type: string
+                      example: "123-456-7890"
+                    Email:
+                      type: string
+                      example: "sam.hill@gmail.com"
+        400:
+          description: Bad request - Missing required fields
         404:
-          description: URL Not Found
+          description: No matching contacts found
         500:
-          description: Server Error
-          
+          description: Internal server error
+
 definitions:
   Login:
     type: object
     required:
-    - login
-    - password
+      - login
+      - password
     properties:
       login:
         type: string
-        example: "fred"
+        example: "SamH"
       password:
         type: string
-        example: "secret"
-  Color:
+        example: "Test"
+
+  CreateAccount:
     type: object
     required:
-    - userId
-    - color
+      - firstName
+      - lastName
+      - username
+      - password
+    properties:
+      firstName:
+        type: string
+        example: "Sam"
+      lastName:
+        type: string
+        example: "Hill"
+      username:
+        type: string
+        example: "SamH"
+      password:
+        type: string
+        example: "Test"
+
+  SearchContact:
+    type: object
+    required:
+      - userId
     properties:
       userId:
         type: integer
         example: 1
-      color:
+      firstName:
         type: string
-        example: "Blue Green"
-  Search:
-    type: object
-    required:
-    - userId
-    - search
-    properties:
-      userId:
-        type: integer
-        example: 1
-      search:
+        example: "Sam"
+      lastName:
         type: string
-        example: "bl"
+        example: "Hill"
 
-
-host: COP4331-5.com
-basePath: /LAMPAPI
+host: cop-4331-spring2025-6.xyz
+basePath: /
 schemes:
-- http
+  - http
