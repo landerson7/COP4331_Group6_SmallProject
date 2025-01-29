@@ -168,45 +168,43 @@ body {
 }
 
 .contact-results {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 90%;
-  }
-  
-  .contact-item {
-	background-color: white;
-	border-radius: 20px;
-	margin-top: 5px;
-	padding: 10px;
-	width: 90%;
-	border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow-y: auto;
+    max-height: 80%;
 }
 
-.contact-item:hover {
-	background-color: grey;
-	cursor: pointer;
+.contact-box {
+    background-color: white;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 90%;
+    text-align: center;
+    font-size: 1.5rem;
 }
   
-  .pagination-container {
+.pagination-container {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	margin-top: auto;
+	margin-top: 40px;
 	padding: 20px;
 	border-top: 2px solid black;
-  }
+}
   
-  .pagination-btn {
+.pagination-btn {
 	padding: 8px 12px;
 	background-color: #007BFF;
 	color: white;
 	border: none;
 	cursor: pointer;
 	border-radius: 4px;
-  }
+}
   
-  .pagination-btn:disabled {
+.pagination-btn:disabled {
 	background-color: #cccccc;
 	cursor: not-allowed;
-  } 
+} 
