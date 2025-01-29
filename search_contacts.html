@@ -12,8 +12,8 @@
     <div>
       <div style="border-right: 3px solid black;" class="contacts-cell top-cell">
         <div class="search-container">
-			<button class="search-btn" id="search-btn" onclick="doSearchContact()">Search</button>
-          	<input type="text" class="search-box" id="search-box" placeholder="Search contacts...">
+          <button class="search-btn" id="search-btn">Search</button>
+          <input type="text" class="search-box" id="search-box" placeholder="Search contacts...">
         </div>
       </div>
       <div style="border-left: 3px solid black;" class="contacts-cell top-cell" id="contact-name">Contact Name</div>
@@ -21,13 +21,22 @@
 
     <!-- Bottom Row -->
     <div>
-      <div style="border-right: 3px solid black;" class="contacts-cell bottom-cell" id="contact-results">
-        <!-- Dynamically populate search results here -->
+      <div style="border-right: 3px solid black;" class="contacts-cell bottom-cell">
+        <div id="contact-results" class="contact-results">
+          <!-- Contacts will be loaded here -->
+        </div>
 
+        <!-- Pagination -->
+        <div id="pagination" class="pagination-container">
+          <button id="prev-page" class="pagination-btn" disabled>Previous</button>
+          <span id="page-info">Page 1</span>
+          <button id="next-page" class="pagination-btn">Next</button>
+        </div>
       </div>
+
       <div style="border-left: 3px solid black;" class="contacts-cell bottom-cell">
         <div class="contact-info">
-          <label style="padding-top: 0px;" for="first-name">First Name</label>
+          <label for="first-name">First Name</label>
           <input type="text" id="first-name">
 
           <label for="last-name">Last Name</label>
@@ -48,10 +57,10 @@
       </div>
     </div>
   </div>
-	
+
   <button class="btn btn-logout" id="logout-btn" onclick="doLogout()">Log Out</button>
-  
-  <!--JavaScript-->
-  <script src="javascript/code.js"></script>
+
+  <!-- Link to External JavaScript -->
+  <script src="javascript/search_contacts.js"></script>
 </body>
 </html>
