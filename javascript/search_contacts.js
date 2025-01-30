@@ -64,8 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
         prevPageBtn.disabled = currentPage === 1;
         nextPageBtn.disabled = endIndex >= contacts.length;
     }
-    
-	
 	
     prevPageBtn.addEventListener("click", function () {
         if (currentPage > 1) {
@@ -101,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
             lastName: document.getElementById("contact_lastName").value.trim(),
             phone: document.getElementById("contact_phone").value.trim(),
             email: document.getElementById("contact_email").value.trim(),
-            userId: 1  // CHANGE "1" TO "userId" WHEN DONE TESTING
+            userId: userId
         };
 
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
@@ -141,6 +139,12 @@ document.addEventListener("DOMContentLoaded", function () {
     
     renderContacts();
 });
+
+//Clear userId and route to login page
+function doLogout() {
+    localStorage.removeItem('userId');
+    window.location.href = 'index.html';
+}
 
 function populateContactFields(passedId) {
         const index = passedId.split("-")[2];
