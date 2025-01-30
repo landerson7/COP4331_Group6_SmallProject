@@ -37,16 +37,16 @@
       <div style="border-left: 3px solid black;" class="contacts-cell bottom-cell">
         <div class="contact-info">
           <label for="first-name">First Name</label>
-          <input type="text" id="first-name">
+          <input style="width: 70%" type="text" id="first-name">
 
           <label for="last-name">Last Name</label>
-          <input type="text" id="last-name">
+          <input style="width: 70%" type="text" id="last-name">
 
           <label for="phone-number">Phone Number</label>
-          <input type="text" id="phone-number">
+          <input style="width: 70%" type="text" id="phone-number">
 
           <label for="email">Email</label>
-          <input type="email" id="email">
+          <input style="width: 70%" type="email" id="email">
 
           <div class="button-row">
             <button class="btn btn-create" id="create-btn">Create</button>
@@ -59,6 +59,24 @@
   </div>
 
   <button class="btn btn-logout" id="logout-btn" onclick="doLogout()">Log Out</button>
+
+  <!-- Pop-up Modal -->
+  <div id="createContactModal" class="modal">
+    <div class="modal-content">
+        <h2>Create Contact</h2>
+		<p class="error-message" id="error-message"></p>
+        <label>First Name:</label>
+        <input type="text" id="contact_firstName">
+        <label>Last Name:</label>
+        <input type="text" id="contact_lastName">
+        <label>Phone:</label>
+        <input type="text" id="contact_phone">
+        <label>Email:</label>
+        <input type="email" id="contact_email">
+        <button id="saveContactBtn">Save & Create</button>
+        <button id="cancelBtn">Cancel</button>
+    </div>
+  </div>
 
   <!-- Link to External JavaScript -->
   <script src="javascript/search_contacts.js"></script>
