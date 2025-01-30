@@ -231,6 +231,11 @@ body {
     text-align: center;
     font-size: 1.5rem;
 }
+
+.contact-box:hover {
+    background-color: whitesmoke;
+   
+}
   
 .pagination-container {
 	display: flex;
