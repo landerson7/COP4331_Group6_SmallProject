@@ -109,6 +109,8 @@ function register() {
 						} else {
 							// Redirect to contacts page on success
 							window.location.href = './search_contacts.html';
+							//set local data
+							localStorage.setItem('userId', data.id);
 						}
 					})
 					.catch((error) => {
