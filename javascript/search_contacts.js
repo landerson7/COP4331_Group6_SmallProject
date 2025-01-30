@@ -1,3 +1,12 @@
+//Get userId from browser
+const userId = localStorage.getItem("userId");
+
+//No userId in browser
+if (!userId) {
+    alert("You must be logged in to search contacts.");
+    window.location.href = "login.html"; // Redirect to login page
+}
+
 const contacts = [
         { name: "Alice Johnson",
           phoneNumber: "1234567890",
@@ -93,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
             lastName: document.getElementById("contact_lastName").value.trim(),
             phone: document.getElementById("contact_phone").value.trim(),
             email: document.getElementById("contact_email").value.trim(),
-            userId: 1  // Replace with actual user ID
+            userId: 1  // CHANGE "1" TO "userId" WHEN DONE TESTING
         };
 
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
