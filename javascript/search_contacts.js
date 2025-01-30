@@ -1,27 +1,26 @@
-//Get userId from browser
+// UNCOMMENT WHEN DONE TESTING
+/*//Get userId from browser
 const userId = localStorage.getItem("userId");
 
 //No userId in browser
 if (!userId) {
     alert("You must be logged in to search contacts.");
     window.location.href = "login.html"; // Redirect to login page
-}
+}*/
 
 const contacts = [
-        { name: "Alice Johnson",
-          phoneNumber: "1234567890",
-          email: "alice@example.com"},
-        { name: "Bob Smith" },
-        { name: "Charlie Davis" },
-        { name: "David Wilson" },
-        { name: "Emma Brown" },
-        { name: "Frank Green" },
-        { name: "Grace Taylor" },
-        { name: "Hank White" },
-        { name: "Ivy Martinez" },
-        { name: "Jack Lee" },
-        { name: "Jack Black" },
-        { name: "Black Jack" }
+    { firstName: "Alice", lastName: "Johnson", phoneNumber: "1234567890", email: "alice@example.com" },
+    { firstName: "Bob", lastName: "Smith", phoneNumber: "9876543210", email: "bob@example.com" },
+    { firstName: "Charlie", lastName: "Davis", phoneNumber: "4561237890", email: "charlie@example.com" },
+    { firstName: "David", lastName: "Wilson", phoneNumber: "3216549870", email: "david@example.com" },
+    { firstName: "Emma", lastName: "Brown", phoneNumber: "7418529630", email: "emma@example.com" },
+    { firstName: "Frank", lastName: "Green", phoneNumber: "8529637410", email: "frank@example.com" },
+    { firstName: "Grace", lastName: "Taylor", phoneNumber: "3692581470", email: "grace@example.com" },
+    { firstName: "Hank", lastName: "White", phoneNumber: "1597534860", email: "hank@example.com" },
+    { firstName: "Ivy", lastName: "Martinez", phoneNumber: "6547891230", email: "ivy@example.com" },
+    { firstName: "Jack", lastName: "Lee", phoneNumber: "7539514560", email: "jack@example.com" },
+    { firstName: "Jack", lastName: "Black", phoneNumber: "8524561230", email: "jackblack@example.com" },
+    { firstName: "Black", lastName: "Jack", phoneNumber: "9513572580", email: "blackjack@example.com" }
 ]; // Example data, replace with actual fetched contacts
 	
 document.addEventListener("DOMContentLoaded", function () {
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             contactBox.classList.add("contact-box");
             contactBox.setAttribute("id", "contact-box-"+(startIndex+offset));
             contactBox.setAttribute("onclick", "populateContactFields(id)");
-            contactBox.innerText = contact.name;
+            contactBox.innerText = `${contact.firstName} ${contact.lastName}`;
             contactResults.appendChild(contactBox);
             offset += 1;
         });
@@ -146,11 +145,10 @@ document.addEventListener("DOMContentLoaded", function () {
 function populateContactFields(passedId) {
         const index = passedId.split("-")[2];
         const contact = contacts[index];
-        const nameArray = contact.name.split(" ");
         
         // Decide whether to access elem.innerHTML, elem.textContent, or elem.value.
-        document.getElementById("first-name").value = nameArray[0];
-        document.getElementById("last-name").value = nameArray[1];
+        document.getElementById("first-name").value = contact.firstName;
+        document.getElementById("last-name").value = contact.lastName;
         document.getElementById("phone-number").value = contact.phoneNumber;
         document.getElementById("email").value = contact.email;
 }
