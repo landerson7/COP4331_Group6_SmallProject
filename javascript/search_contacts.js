@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const contacts = [
-        { name: "Alice Johnson" },
+const contacts = [
+        { name: "Alice Johnson",
+		  phoneNumber: "1234567890",
+		  email: "alice@example.com"},
         { name: "Bob Smith" },
         { name: "Charlie Davis" },
         { name: "David Wilson" },
@@ -12,8 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Jack Lee" },
         { name: "Jack Black" },
         { name: "Black Jack" }
-    ]; // Example data, replace with actual fetched contacts
-
+]; // Example data, replace with actual fetched contacts
+	
+document.addEventListener("DOMContentLoaded", function () {
     const contactsPerPage = 5;
     let currentPage = 1;
 
@@ -40,17 +42,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const startIndex = (currentPage - 1) * contactsPerPage;
         const endIndex = startIndex + contactsPerPage;
         const currentContacts = contacts.slice(startIndex, endIndex);
+        let offset = 0;
         currentContacts.forEach(contact => {
             const contactBox = document.createElement("div");
             contactBox.classList.add("contact-box");
+            contactBox.setAttribute("id", "contact-box-"+(startIndex+offset));
+            contactBox.setAttribute("onclick", "populateContactFields(id)");
             contactBox.innerText = contact.name;
             contactResults.appendChild(contactBox);
+            offset += 1;
         });
         pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(contacts.length / contactsPerPage)}`;
         prevPageBtn.disabled = currentPage === 1;
         nextPageBtn.disabled = endIndex >= contacts.length;
     }
     
+	
+	
     prevPageBtn.addEventListener("click", function () {
         if (currentPage > 1) {
             currentPage--;
@@ -125,3 +133,15 @@ document.addEventListener("DOMContentLoaded", function () {
     
     renderContacts();
 });
+
+function populateContactFields(passedId) {
+        const index = passedId.split("-")[2];
+        const contact = contacts[index];
+        const nameArray = contact.name.split(" ");
+        
+        // Decide whether to access elem.innerHTML, elem.textContent, or elem.value.
+        document.getElementById("first-name").value = nameArray[0];
+        document.getElementById("last-name").value = nameArray[1];
+        document.getElementById("phone-number").value = contact.phoneNumber;
+        document.getElementById("email").value = contact.email;
+}
