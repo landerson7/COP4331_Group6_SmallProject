@@ -8,6 +8,8 @@ if (!userId) {
     window.location.href = "login.html"; // Redirect to login page
 }*/
 
+let returnedContacts = [];
+
 const contacts = [
     { firstName: "Alice", lastName: "Johnson", phoneNumber: "1234567890", email: "alice@example.com" },
     { firstName: "Bob", lastName: "Smith", phoneNumber: "9876543210", email: "bob@example.com" },
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextPageBtn = document.getElementById("next-page");
     const pageInfo = document.getElementById("page-info");
     const createBtn = document.getElementById("create-btn");
+    const searchBtn = document.getElementById("search-btn");
     const createModal = document.getElementById("createContactModal");
     const cancelBtn = document.getElementById("cancelBtn");
     const saveContactBtn = document.getElementById("saveContactBtn");
@@ -49,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
         contactResults.innerHTML = "";
         const startIndex = (currentPage - 1) * contactsPerPage;
         const endIndex = startIndex + contactsPerPage;
-        const currentContacts = contacts.slice(startIndex, endIndex);
+        // const currentContacts = contacts.slice(startIndex, endIndex);
+        const currentContacts = returnedContacts.slice(startIndex, endIndex);
         let offset = 0;
         currentContacts.forEach(contact => {
             const contactBox = document.createElement("div");
@@ -101,6 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
             email: document.getElementById("contact_email").value.trim(),
             userId: userId
         };
+
+    searchBtn.addEventListener("click", function() {
+		doSearchContact();
+		renderContacts();
+	});
 
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
             errorMsg.textContent = "All fields are required!";
@@ -155,4 +164,93 @@ function populateContactFields(passedId) {
         document.getElementById("last-name").value = contact.lastName;
         document.getElementById("phone-number").value = contact.phoneNumber;
         document.getElementById("email").value = contact.email;
+}
+
+//searches for contacts
+function doSearchContact() {
+    //search term from box
+    const searchBox = document.getElementById("search-box");
+    const searchTerm = searchBox.value.trim();
+	const fullName = searchTerm.split(" ");
+	let firstName = "";
+	let lastName = "";
+	console.log(fullName);
+	if (fullName.length > 1) {
+		firstName = fullName[0];
+		lastName = fullName[1];
+	} else {
+		firstName = fullName[0];
+		lastName = "";
+	}
+    //Get userId from browser
+    const userId = localStorage.getItem("userId");
+
+    //No userId in browser
+    if (!userId) {
+        alert("You must be logged in to search contacts.");
+        return;
+    }
+    
+
+    //payload
+	let payload;
+	if (lastName === "") {
+		console.log(firstName)
+		payload = { firstName: searchTerm, userId: userId };
+	} else {
+		//console.log(firstName)
+		payload = { firstName: firstName, lastName: lastName, userId: userId };
+	}
+    
+
+	console.log(payload);
+    const jsonPayload = JSON.stringify(payload);
+
+    
+    //url
+	const url = urlBase + '/searchContact.' + extension;
+
+    //XML Request made
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+           
+                try {
+                    const response = JSON.parse(xhr.responseText);
+					console.log(response);
+                    //Display from handler func
+                    if (response.contacts && response.contacts.length > 0) {
+                        returnedContacts = response.contacts;
+                    } else { //no results found
+                        displayNoResultsMessage();
+                    }
+                } catch (err) {
+                    console.error("Error parsing response:", err);
+                    alert("An error occurred while processing the response.");
+                }
+            } else { //error
+                console.error(`Error: ${this.status} - ${xhr.statusText}`);
+                alert(`Failed to search contacts. Status: ${this.status}`);
+            }
+        
+    };
+
+    xhr.send(jsonPayload);
+}
+
+// Function to display a "no results found" message
+function displayNoResultsMessage() {
+    const resultsContainer = document.getElementById("contact-results");
+
+    // Clear previous results
+    resultsContainer.innerHTML = "";
+
+    // Display message
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "no-results";
+    messageDiv.textContent = "No contacts found.";
+    resultsContainer.appendChild(messageDiv);
 }
