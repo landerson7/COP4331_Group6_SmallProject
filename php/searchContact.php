@@ -30,7 +30,9 @@
             $stmt->bind_param("ssi", $firstName, $lastName, $userId);
         } else {
             //if no search term provided give 10 random contacts
-            $stmt = $conn->prepare("SELECT * FROM Contacts LIMIT 10");
+            $userId = $inData["userId"];
+            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ? LIMIT 10");
+            $stmt->bind_param("i", $userId);
         }
 
         if ($stmt->execute()) //if success
