@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
             contactBox.classList.add("contact-box");
             contactBox.setAttribute("id", "contact-box-"+(startIndex+offset));
             contactBox.setAttribute("onclick", "populateContactFields(id)");
-            contactBox.innerText = `${contact.firstName} ${contact.lastName}`;
+            contactBox.innerText = `${contact.FirstName} ${contact.LastName}`;
             contactResults.appendChild(contactBox);
             offset += 1;
         });
-        pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(contacts.length / contactsPerPage)}`;
+        pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(returnedContacts.length / contactsPerPage)}`;
         prevPageBtn.disabled = currentPage === 1;
         nextPageBtn.disabled = endIndex >= contacts.length;
     }
@@ -82,6 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
             renderContacts();
         }
     });
+
+    searchBtn.addEventListener("click", function() {
+		doSearchContact();
+		renderContacts();
+	});
     
     createBtn.addEventListener("click", function () {
         createModal.style.display = "flex";
@@ -105,11 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
             email: document.getElementById("contact_email").value.trim(),
             userId: userId
         };
-
-    searchBtn.addEventListener("click", function() {
-		doSearchContact();
-		renderContacts();
-	});
 
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
             errorMsg.textContent = "All fields are required!";
@@ -157,13 +157,13 @@ function doLogout() {
 
 function populateContactFields(passedId) {
         const index = passedId.split("-")[2];
-        const contact = contacts[index];
+        const contact = returnedContacts[index];
         
         // Decide whether to access elem.innerHTML, elem.textContent, or elem.value.
-        document.getElementById("first-name").value = contact.firstName;
-        document.getElementById("last-name").value = contact.lastName;
-        document.getElementById("phone-number").value = contact.phoneNumber;
-        document.getElementById("email").value = contact.email;
+        document.getElementById("first-name").value = contact.FirstName;
+        document.getElementById("last-name").value = contact.LastName;
+        document.getElementById("phone-number").value = contact.Phone;
+        document.getElementById("email").value = contact.Email;
 }
 
 //searches for contacts
@@ -208,7 +208,8 @@ function doSearchContact() {
 
     
     //url
-	const url = urlBase + '/searchContact.' + extension;
+	const url = "searchContact.php";
+
 
     //XML Request made
     const xhr = new XMLHttpRequest();
@@ -216,28 +217,26 @@ function doSearchContact() {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     xhr.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-           
+        if (this.readyState === 4) {
+            if (this.status === 200) {
                 try {
                     const response = JSON.parse(xhr.responseText);
-					console.log(response);
-                    //Display from handler func
+                    console.log(response);
                     if (response.contacts && response.contacts.length > 0) {
                         returnedContacts = response.contacts;
-                    } else { //no results found
+                    } else { // no results found
                         displayNoResultsMessage();
                     }
                 } catch (err) {
                     console.error("Error parsing response:", err);
                     alert("An error occurred while processing the response.");
                 }
-            } else { //error
+            } else {
                 console.error(`Error: ${this.status} - ${xhr.statusText}`);
                 alert(`Failed to search contacts. Status: ${this.status}`);
             }
-        
-    };
-
+        }
+    };    
     xhr.send(jsonPayload);
 }
 

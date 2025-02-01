@@ -27,7 +27,7 @@
             $stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE ? AND UserID =? AND LastName LIKE ?");
             $stmt->bind_param("sis", $inData["firstName"], $userId, $inData["lastName"]);
         } else { //nothing
-            $stmt = $conn->prepare("SELECT TOP 10 FROM Contacts")
+            $stmt = $conn->prepare("SELECT TOP 10 FROM Contacts");
         }
         
 
