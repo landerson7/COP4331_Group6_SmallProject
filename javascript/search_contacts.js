@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(returnedContacts.length / contactsPerPage)}`;
         prevPageBtn.disabled = currentPage === 1;
-        nextPageBtn.disabled = endIndex >= contacts.length;
+        nextPageBtn.disabled = endIndex >= returnedContacts.length;
     }
 	
     prevPageBtn.addEventListener("click", function () {
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextPageBtn.addEventListener("click", function () {
-        if (currentPage * contactsPerPage < contacts.length) {
+        if (currentPage * contactsPerPage < returnedContacts.length) {
             currentPage++;
             renderContacts();
         }
