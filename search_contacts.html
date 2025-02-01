@@ -60,7 +60,7 @@
 
   <button class="btn btn-logout" id="logout-btn" onclick="doLogout()">Log Out</button>
 
-  <!-- Pop-up Modal -->
+  <!-- Pop-up Modal: Create -->
   <div id="createContactModal" class="modal">
     <div class="modal-content">
         <h2>Create Contact</h2>
@@ -75,6 +75,24 @@
         <input type="email" id="contact_email">
         <button id="saveContactBtn">Save & Create</button>
         <button id="cancelBtn">Cancel</button>
+    </div>
+  </div>
+  
+  <!-- Pop-up Modal: Update -->
+  <div id="updateContactModal" class="modal">
+    <div class="modal-content">
+        <h2>Create Contact</h2>
+		<p class="error-message" id="update-error-message"></p>
+        <label>First Name:</label>
+        <input type="text" id="update_contact_firstName">
+        <label>Last Name:</label>
+        <input type="text" id="update_contact_lastName">
+        <label>Phone:</label>
+        <input type="text" id="update_contact_phone">
+        <label>Email:</label>
+        <input type="email" id="update_contact_email">
+        <button id="updateSaveContactBtn">Save & Update</button>
+        <button id="updateCancelBtn">Cancel</button>
     </div>
   </div>
 

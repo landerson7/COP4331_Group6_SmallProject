@@ -9,6 +9,7 @@ if (!userId) {
 }*/
 
 let returnedContacts = [];
+let currentContactIndex = 0;
 
 const contacts = [
     { firstName: "Alice", lastName: "Johnson", phoneNumber: "1234567890", email: "alice@example.com" },
@@ -39,6 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelBtn = document.getElementById("cancelBtn");
     const saveContactBtn = document.getElementById("saveContactBtn");
     const errorMsg = document.getElementById("error-message");
+    
+    const updateBtn = document.getElementById("update-btn");
+	const updateModal = document.getElementById("updateContactModal");
+	const updateCancelBtn = document.getElementById("updateCancelBtn");
+    const updateSaveContactBtn = document.getElementById("updateSaveContactBtn");
+    const updateErrorMsg = document.getElementById("update-error-message");
+    
 
     function validateEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -145,6 +153,77 @@ document.addEventListener("DOMContentLoaded", function () {
             errorMsg.textContent = "An unexpected error occurred. Please try again.";
         });
     });
+        
+    updateBtn.addEventListener("click", function () {
+        updateModal.style.display = "flex";
+		
+		document.getElementById("update_contact_firstName").value = document.getElementById("first-name").value;
+        document.getElementById("update_contact_lastName").value = document.getElementById("last-name").value;
+        document.getElementById("update_contact_phone").value = document.getElementById("phone-number").value;
+        document.getElementById("update_contact_email").value = document.getElementById("email").value;
+		
+        updateErrorMsg.textContent = "";
+    });
+
+    updateCancelBtn.addEventListener("click", function () {
+        updateModal.style.display = "none";
+        updateErrorMsg.textContent = "";
+        document.getElementById("update_contact_firstName").value = "";
+        document.getElementById("update_contact_lastName").value = "";
+        document.getElementById("update_contact_phone").value = "";
+        document.getElementById("update_contact_email").value = "";
+    });
+
+    updateSaveContactBtn.addEventListener("click", function () {
+		let contact_data = {
+            firstName: document.getElementById("update_contact_firstName").value.trim(),
+            lastName: document.getElementById("update_contact_lastName").value.trim(),
+            phone: document.getElementById("update_contact_phone").value.trim(),
+            email: document.getElementById("update_contact_email").value.trim(),
+			ID: returnedContacts[currentContactIndex].ID,
+            userId: userId
+        };
+		
+        if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
+            updateErrorMsg.textContent = "All fields are required!";
+            return;
+        }
+
+        if (!validatePhone(contact_data.phone)) {
+            updateErrorMsg.textContent = "Invalid phone number. Please enter a 10-digit number.";
+            return;
+        }
+
+        if (!validateEmail(contact_data.email)) {
+            updateErrorMsg.textContent = "Invalid email format.";
+            return;
+        }
+
+        fetch("updateContact.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(contact_data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.error) {
+                updateErrorMsg.textContent = result.error;
+            } else {
+                returnedContacts[currentContactIndex] = contact_data;
+				renderContacts();
+				
+				let passedId = "contact-box-" + currentContactIndex;
+				populateContactFields(passedId);
+				
+				updateModal.style.display = "none";
+                updateErrorMsg.textContent = "";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            updateErrorMsg.textContent = "An unexpected error occurred. Please try again.";
+        });
+    });
     
     renderContacts();
 });
@@ -156,10 +235,9 @@ function doLogout() {
 }
 
 function populateContactFields(passedId) {
-        const index = passedId.split("-")[2];
-        const contact = returnedContacts[index];
-        
-        // Decide whether to access elem.innerHTML, elem.textContent, or elem.value.
+        currentContactIndex = passedId.split("-")[2];
+        const contact = returnedContacts[currrentContactIndex];
+
         document.getElementById("first-name").value = contact.FirstName;
         document.getElementById("last-name").value = contact.LastName;
         document.getElementById("phone-number").value = contact.Phone;
