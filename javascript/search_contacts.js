@@ -36,10 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const pageInfo = document.getElementById("page-info");
     const createBtn = document.getElementById("create-btn");
     const searchBtn = document.getElementById("search-btn");
+    const deleteBtn = document.getElementById("delete-btn");
+    const deleteConfirm = document.getElementById("deleteConfirm");
+    const deleteCancel= document.getElementById("deleteCancel");
     const createModal = document.getElementById("createContactModal");
+    const deleteModal = document.getElementById("deleteContactModal");
     const cancelBtn = document.getElementById("cancelBtn");
     const saveContactBtn = document.getElementById("saveContactBtn");
     const errorMsg = document.getElementById("error-message");
+    const deleteErrorMsg = document.getElementById("delete-error-message");
     
     const updateBtn = document.getElementById("update-btn");
 	const updateModal = document.getElementById("updateContactModal");
@@ -94,6 +99,17 @@ document.addEventListener("DOMContentLoaded", function () {
     searchBtn.addEventListener("click", function() {
 		doSearchContact();
 		renderContacts();
+	});
+	
+    deleteBtn.addEventListener("click", function() {
+		deleteModal.style.display = "flex";
+        deleteErrorMsg.textContent = "";
+	});
+	
+    deleteConfirm.addEventListener("click", doDelete);
+	
+    deleteCancel.addEventListener("click", function() {
+		deleteModal.style.display = "none";
 	});
     
     createBtn.addEventListener("click", function () {
@@ -331,3 +347,60 @@ function displayNoResultsMessage() {
     messageDiv.textContent = "No contacts found.";
     resultsContainer.appendChild(messageDiv);
 }
+
+function doDelete() {
+	let contact_data = {
+		firstName: document.getElementById("first-name").value.trim(),
+		lastName: document.getElementById("last-name").value.trim(),
+		phone: document.getElementById("phone-number").value.trim(),
+		email: document.getElementById("email").value.trim(),
+		ID: returnedContacts[currentContactIndex].ID,
+		userId: userId
+	};
+	
+	if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
+            deleteErrorMsg.textContent = "All fields are required!";
+            return;
+        }
+
+	if (!validatePhone(contact_data.phone)) {
+		deleteErrorMsg.textContent = "Invalid phone number. Please enter a 10-digit number.";
+		return;
+	}
+
+	if (!validateEmail(contact_data.email)) {
+		deleteErrorMsg.textContent = "Invalid email format.";
+		return;
+	}
+
+	fetch("deleteContact.php", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(contact_data)
+	})
+	.then(response => response.json())
+	.then(result => {
+		if (result.error) {
+			deleteErrorMsg.textContent = result.error;
+		} else {
+			// Delete element from the global array.
+			returnedContacts.splice(currentContactIndex, 1);
+			renderContacts();
+			
+			document.getElementById("first-name").value = "";
+			document.getElementById("last-name").value = "";
+			document.getElementById("phone-number").value = "";
+			document.getElementById("email").value = "";
+			
+			deleteModal.style.display = "none";
+			deleteErrorMsg.textContent = "";
+		}
+	})
+	.catch(error => {
+		console.error("Error:", error);
+		deleteErrorMsg.textContent = "An unexpected error occurred. Please try again.";
+	});
+};
+
+
+
