@@ -236,7 +236,7 @@ function doLogout() {
 
 function populateContactFields(passedId) {
         currentContactIndex = passedId.split("-")[2];
-        const contact = returnedContacts[currrentContactIndex];
+        const contact = returnedContacts[currentContactIndex];
 
         document.getElementById("first-name").value = contact.FirstName;
         document.getElementById("last-name").value = contact.LastName;
