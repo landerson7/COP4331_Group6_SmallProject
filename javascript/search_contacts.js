@@ -306,10 +306,10 @@ function populateContactFields(passedId) {
         currentContactIndex = passedId.split("-")[2];
         const contact = returnedContacts[currentContactIndex];
 
-        document.getElementById("first-name").value = contact.FirstName;
-        document.getElementById("last-name").value = contact.LastName;
-        document.getElementById("phone-number").value = contact.Phone;
-        document.getElementById("email").value = contact.Email;
+        document.getElementById("first-name").value = contact.firstName;
+        document.getElementById("last-name").value = contact.lastName;
+        document.getElementById("phone-number").value = contact.phone;
+        document.getElementById("email").value = contact.email;
 }
 
 //searches for contacts
