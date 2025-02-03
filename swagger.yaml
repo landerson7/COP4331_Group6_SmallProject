@@ -133,6 +133,88 @@ paths:
         500:
           description: Internal server error
 
+  /php/createContact.php:
+    post:
+      tags:
+        - Contacts
+      summary: Creates a new contact
+      operationId: createContact
+      description: Inserts a new contact into the database
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: contactItem
+          description: Contact data for creation
+          required: true
+          schema:
+            $ref: '#/definitions/CreateContact'
+      responses:
+        200:
+          description: Contact created successfully
+        400:
+          description: Bad request - Missing required fields
+        500:
+          description: Internal server error
+
+  /php/deleteContact.php:
+    post:
+      tags:
+        - Contacts
+      summary: Deletes a contact
+      operationId: deleteContact
+      description: Deletes a contact based on firstName, lastName, phone, email, and userId
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: contactItem
+          description: Contact identifying info
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteContact'
+      responses:
+        200:
+          description: Contact deleted successfully
+        404:
+          description: No matching contact found for this user
+        400:
+          description: Bad request - Missing required fields
+        500:
+          description: Internal server error
+
+  /php/updateContact.php:
+    post:
+      tags:
+        - Contacts
+      summary: Updates a contact
+      operationId: updateContact
+      description: Updates an existing contact's details based on the provided ID and userId
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: contactItem
+          description: Contact data to update
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateContact'
+      responses:
+        200:
+          description: Contact updated successfully
+        404:
+          description: No matching contact or no changes made
+        400:
+          description: Bad request - Missing required fields
+        500:
+          description: Internal server error
+
 definitions:
   Login:
     type: object
@@ -182,6 +264,85 @@ definitions:
       lastName:
         type: string
         example: "Hill"
+
+  CreateContact:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - phone
+      - email
+      - userId
+    properties:
+      firstName:
+        type: string
+        example: "Sam"
+      lastName:
+        type: string
+        example: "Hill"
+      phone:
+        type: string
+        example: "111-111-1111"
+      email:
+        type: string
+        example: "sam.hill@email.com"
+      userId:
+        type: integer
+        example: 1
+
+  DeleteContact:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - phone
+      - email
+      - userId
+    properties:
+      firstName:
+        type: string
+        example: "Sam"
+      lastName:
+        type: string
+        example: "Hill"
+      phone:
+        type: string
+        example: "111-111-1111"
+      email:
+        type: string
+        example: "sam.hill@email.com"
+      userId:
+        type: integer
+        example: 1
+
+  UpdateContact:
+    type: object
+    required:
+      - id
+      - firstName
+      - lastName
+      - phone
+      - email
+      - userId
+    properties:
+      id:
+        type: integer
+        example: 1
+      firstName:
+        type: string
+        example: "Sam"
+      lastName:
+        type: string
+        example: "Hill"
+      phone:
+        type: string
+        example: "111-111-1111"
+      email:
+        type: string
+        example: "sam.hill@email.com"
+      userId:
+        type: integer
+        example: 2
 
 host: cop-4331-spring2025-6.xyz
 basePath: /
