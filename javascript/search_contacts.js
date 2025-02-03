@@ -107,11 +107,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     searchBtn.addEventListener("click", function() {
-		doSearchContact();
+        doSearchContact();
         setTimeout(() => {
-		renderContacts();
-        }, 500);
-	});
+            if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+                renderContacts();
+            }
+        }, 300); //Delay to give time for search
+    });
+    
 	
     deleteBtn.addEventListener("click", function() {
 		deleteModal.style.display = "flex";
@@ -395,6 +398,7 @@ function doSearchContact() {
                     if (response.contacts && response.contacts.length > 0) {
                         returnedContacts = response.contacts;
                     } else { // no results found
+                        returnedContacts = [];
                         displayNoResultsMessage();
                     }
                 } catch (err) {
