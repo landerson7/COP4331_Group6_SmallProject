@@ -15,25 +15,32 @@
     else 
     {
         //search contact from database
-        if ($inData["lastName"] == "" && $inData["firstName"] != "") { 
-            //if only one search term provided search first AND last names
+        if (!empty(trim($inData["firstName"])) && empty(trim($inData["lastName"]))) {
+            // Only first name provided; search both first and last names starting with the given term.
             $userId = $inData["userId"];
-            $searchTerm = $inData["firstName"] . "%"; // % search formatter
+            $searchTerm = trim($inData["firstName"]) . "%";
             $stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ?) AND UserID = ?");
             $stmt->bind_param("ssi", $searchTerm, $searchTerm, $userId);
-        } else if ($inData["lastName"] != "" && $inData["firstName"] != "") {
-            //if both first and last names provided search both
+        } else if (!empty(trim($inData["firstName"])) && !empty(trim($inData["lastName"]))) {
+            // Both first and last names provided; search for records matching both.
             $userId = $inData["userId"];
-            $firstName = "%" . $inData["firstName"] . "%";
-            $lastName  = "%" . $inData["lastName"] . "%";
+            $firstName = "%" . trim($inData["firstName"]) . "%";
+            $lastName  = "%" . trim($inData["lastName"]) . "%";
             $stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE ? AND LastName LIKE ? AND UserID = ?");
             $stmt->bind_param("ssi", $firstName, $lastName, $userId);
+        } else if (empty(trim($inData["firstName"])) && !empty(trim($inData["lastName"]))) {
+            // Only last name provided; search contacts based solely on last name.
+            $userId = $inData["userId"];
+            $searchTerm = trim($inData["lastName"]) . "%";
+            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE LastName LIKE ? AND UserID = ?");
+            $stmt->bind_param("si", $searchTerm, $userId);
         } else {
-            //if no search term provided give 10 random contacts
+            // No search term provided; return 10 random contacts.
             $userId = $inData["userId"];
             $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ? LIMIT 10");
             $stmt->bind_param("i", $userId);
         }
+        
 
         if ($stmt->execute()) //if success
         {
