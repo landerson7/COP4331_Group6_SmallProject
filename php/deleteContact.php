@@ -14,8 +14,8 @@
 	else 
 	{
 		//delete calls from just the first/last names
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName=? AND LastName=? AND UserID=?");
-		$stmt->bind_param("ssi", $firstName, $lastName, $userId);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName=? AND LastName=? AND UserID=? AND ID=?");
+		$stmt->bind_param("ssii", $firstName, $lastName, $userId, $inData["ID"]);
 		$stmt->execute();
 
 		if ($stmt->affected_rows > 0) 
