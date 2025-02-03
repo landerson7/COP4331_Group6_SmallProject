@@ -1,12 +1,12 @@
 // UNCOMMENT WHEN DONE TESTING
-/*//Get userId from browser
+//Get userId from browser
 const userId = localStorage.getItem("userId");
 
 //No userId in browser
 if (!userId) {
     alert("You must be logged in to search contacts.");
     window.location.href = "login.html"; // Redirect to login page
-}*/
+}
 
 let returnedContacts = [];
 let currentContactIndex = 0;
@@ -73,7 +73,17 @@ document.addEventListener("DOMContentLoaded", function () {
             contactBox.classList.add("contact-box");
             contactBox.setAttribute("id", "contact-box-"+(startIndex+offset));
             contactBox.setAttribute("onclick", "populateContactFields(id)");
-            contactBox.innerText = `${contact.FirstName} ${contact.LastName}`;
+
+			// A contact from the client-side global array.
+			if (contact.FirstName === undefined) {
+				contactBox.innerText = `${contact.firstName} ${contact.lastName}`;
+			}
+			
+			// A contact returned from the API.
+			else {
+				contactBox.innerText = `${contact.FirstName} ${contact.LastName}`;
+			}
+            
             contactResults.appendChild(contactBox);
             offset += 1;
         });
@@ -306,10 +316,22 @@ function populateContactFields(passedId) {
         currentContactIndex = passedId.split("-")[2];
         const contact = returnedContacts[currentContactIndex];
 
-        document.getElementById("first-name").value = contact.firstName;
-        document.getElementById("last-name").value = contact.lastName;
-        document.getElementById("phone-number").value = contact.phone;
-        document.getElementById("email").value = contact.email;
+		// A contact from the client-side global array.
+		if (contact.FirstName === undefined) {
+			document.getElementById("first-name").value = contact.firstName;
+			document.getElementById("last-name").value = contact.lastName;
+			document.getElementById("phone-number").value = contact.phone;
+			document.getElementById("email").value = contact.email;
+		}
+
+		// A contact returned from the API.
+		else {
+			document.getElementById("first-name").value = contact.FirstName;
+			document.getElementById("last-name").value = contact.LastName;
+			document.getElementById("phone-number").value = contact.Phone;
+			document.getElementById("email").value = contact.Email;
+		
+		}
 }
 
 //searches for contacts
@@ -399,3 +421,4 @@ function displayNoResultsMessage() {
     messageDiv.textContent = "No contacts found.";
     resultsContainer.appendChild(messageDiv);
 }
+
