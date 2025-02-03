@@ -108,7 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchBtn.addEventListener("click", function() {
 		doSearchContact();
+        setTimeout(() => {
 		renderContacts();
+        }, 500);
 	});
 	
     deleteBtn.addEventListener("click", function() {
