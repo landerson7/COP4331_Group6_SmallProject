@@ -35,9 +35,9 @@
             $stmt = $conn->prepare("SELECT * FROM Contacts WHERE LastName LIKE ? AND UserID = ?");
             $stmt->bind_param("si", $searchTerm, $userId);
         } else {
-            // No search term provided; return 10 random contacts.
+            // No search term provided; return 18 random contacts.
             $userId = $inData["userId"];
-            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ? LIMIT 10");
+            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ? LIMIT 18");
             $stmt->bind_param("i", $userId);
         }
         
