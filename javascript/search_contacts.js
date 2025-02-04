@@ -12,14 +12,6 @@ let returnedContacts = [];
 let currentContactIndex = 0;
 let HTMLID;
 
-//Initial Render of All Contacts
-doSearchContact();
-setTimeout(() => {
-    if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
-        renderContacts();
-    }
-}, 300); //Delay to give time for search
-
 const contacts = [
     { firstName: "Alice", lastName: "Johnson", phoneNumber: "123-456-7890", email: "alice@example.com" },
     { firstName: "Bob", lastName: "Smith", phoneNumber: "987-654-3210", email: "bob@example.com" },
@@ -119,6 +111,14 @@ document.addEventListener("DOMContentLoaded", function () {
         prevPageBtn.disabled = currentPage === 1;
         nextPageBtn.disabled = endIndex >= returnedContacts.length;
     }
+
+    //Initial Render of All Contacts
+    doSearchContact();
+    setTimeout(() => {
+        if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+            renderContacts();
+        }
+    }, 300); //Delay to give time for search
 	
     prevPageBtn.addEventListener("click", function () {
         if (currentPage > 1) {
