@@ -37,7 +37,7 @@
         } else {
             // No search term provided; return 18 random contacts.
             $userId = $inData["userId"];
-            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ? LIMIT 18");
+            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ?");
             $stmt->bind_param("i", $userId);
         }
         
