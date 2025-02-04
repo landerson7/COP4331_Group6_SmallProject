@@ -261,11 +261,6 @@ document.addEventListener("DOMContentLoaded", function () {
             userId: userId
         };
 
-        document.getElementById("contact_firstName").value = "";
-        document.getElementById("contact_lastName").value = "";
-        document.getElementById("contact_phone").value = "";
-        document.getElementById("contact_email").value = "";
-
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
             errorMsg.textContent = "All fields are required!";
             errorMsg.style.display = "block";
@@ -293,9 +288,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(result => {
             if (result.error) {
                 errorMsg.textContent = result.error;
+                errorMsg.style.display = "block";
             } else {
                 createModal.style.display = "none";
                 errorMsg.textContent = "";
+
+                document.getElementById("contact_firstName").value = "";
+                document.getElementById("contact_lastName").value = "";
+                document.getElementById("contact_phone").value = "";
+                document.getElementById("contact_email").value = "";
             }
         })
         .catch(error => {
