@@ -78,11 +78,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const contactBox = document.createElement("div");
             contactBox.classList.add("contact-card");
             contactBox.setAttribute("id", "contact-box-" + (startIndex + offset));
-            contactBox.setAttribute("onclick", "populateContactFields(id)");
+            contactBox.setAttribute("onclick", "selectContact(id)");
 
             // Determine the contact's first and last name
             const firstName = contact.FirstName === undefined ? contact.firstName : contact.FirstName;
             const lastName = contact.LastName === undefined ? contact.lastName : contact.LastName;
+            const phone = contact.Phone === undefined ? contact.phone : contact.Phone;
+            const email = contact.Email === undefined ? contact.email : contact.Email;
 
             // Set the inner HTML of the contactBox
             contactBox.innerHTML = `
@@ -95,10 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="last-name">${lastName}</span>
                     </div>
                     <div class="phone-row">
-                        <span class="phone-number">${contact.Phone}</span>
+                        <span class="phone-number">${phone}</span>
                     </div>
                     <div class="email-row">
-                        <span class="email">${contact.Email}</span>
+                        <span class="email">${email}</span>
                     </div>
                 </div>
             `;
@@ -257,14 +259,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
         
     updateBtn.addEventListener("click", function () {
+        if (!selectedContact) {
+            updateErrorMsg.textContent = "No contact selected.";
+            return;
+        }
+    
         updateModal.style.display = "flex";
-		
-		document.getElementById("update_contact_firstName").value = document.getElementById("first-name").value;
-        document.getElementById("update_contact_lastName").value = document.getElementById("last-name").value;
-        document.getElementById("update_contact_phone").value = document.getElementById("phone-number").value;
-        document.getElementById("update_contact_email").value = document.getElementById("email").value;
-		
-        updateErrorMsg.textContent = "";
+    
+        // Pre-fill update modal with selected contact data
+        document.getElementById("update_contact_firstName").value = selectedContact.firstName || selectedContact.FirstName;
+        document.getElementById("update_contact_lastName").value = selectedContact.lastName || selectedContact.LastName;
+        document.getElementById("update_contact_phone").value = selectedContact.phone || selectedContact.Phone;
+        document.getElementById("update_contact_email").value = selectedContact.email || selectedContact.Email;
     });
 
     updateCancelBtn.addEventListener("click", function () {
@@ -314,8 +320,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 returnedContacts[currentContactIndex] = contact_data;
 				renderContacts();
 				
-				let passedId = "contact-box-" + currentContactIndex;
-				populateContactFields(passedId);
+                selectedContact = null;
+                currentContactIndex = -1;
+    
+                document.querySelectorAll(".contact-card").forEach(card => {
+                    card.classList.remove("selected");
+                });
 				
 				updateModal.style.display = "none";
                 updateErrorMsg.textContent = "";
@@ -336,26 +346,23 @@ function doLogout() {
     window.location.href = 'index.html';
 }
 
-function populateContactFields(passedId) {
-        currentContactIndex = passedId.split("-")[2];
-        const contact = returnedContacts[currentContactIndex];
+let selectedContact = null; // Store selected contact details globally
 
-		// A contact from the client-side global array.
-		if (contact.FirstName === undefined) {
-			document.getElementById("first-name").value = contact.firstName;
-			document.getElementById("last-name").value = contact.lastName;
-			document.getElementById("phone-number").value = contact.phone;
-			document.getElementById("email").value = contact.email;
-		}
+function selectContact(passedId) {
+    currentContactIndex = parseInt(passedId.split("-")[2]);
 
-		// A contact returned from the API.
-		else {
-			document.getElementById("first-name").value = contact.FirstName;
-			document.getElementById("last-name").value = contact.LastName;
-			document.getElementById("phone-number").value = contact.Phone;
-			document.getElementById("email").value = contact.Email;
-		
-		}
+    if (isNaN(currentContactIndex) || currentContactIndex < 0 || currentContactIndex >= returnedContacts.length) {
+        console.error("Invalid contact index:", currentContactIndex);
+        return;
+    }
+
+    selectedContact = returnedContacts[currentContactIndex];
+
+    document.querySelectorAll(".contact-card").forEach(card => {
+        card.classList.remove("selected");
+    });
+
+    document.getElementById(passedId).classList.add("selected");
 }
 
 //searches for contacts

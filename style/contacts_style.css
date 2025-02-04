@@ -103,6 +103,10 @@ body {
     background-color: rgba(120, 0, 120, .9);
 }
 
+.contact-card.selected {
+    border: 2px solid #ff0000;
+}
+
 .contact-image {
     width: 30%;
     display: flex;
