@@ -145,12 +145,15 @@ document.addEventListener("DOMContentLoaded", function () {
     
 	
     deleteBtn.addEventListener("click", function() {
+        deleteErrorMsg.textContent = "";
+
         if (!selectedContact) {
-            updateErrorMsg.textContent = "No contact selected.";
+            deleteErrorMsg.textContent = "No contact selected.";
             return;
         }
 		deleteModal.style.display = "flex";
-        deleteErrorMsg.textContent = "";
+        deleteErrorMsg.style.display = "block";
+        
 	});
 	
     deleteConfirm.addEventListener("click", function () {
@@ -302,12 +305,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
         
     updateBtn.addEventListener("click", function () {
+        updateErrorMsg.textContent = "";
+
         if (!selectedContact) {
             updateErrorMsg.textContent = "No contact selected.";
             return;
         }
     
         updateModal.style.display = "flex";
+        updateErrorMsg.style.display = "block";
     
         // Pre-fill update modal with selected contact data
         document.getElementById("update_contact_firstName").value = selectedContact.firstName || selectedContact.FirstName;
@@ -337,16 +343,19 @@ document.addEventListener("DOMContentLoaded", function () {
 		
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
             updateErrorMsg.textContent = "All fields are required!";
+            updateErrorMsg.style.display = "block";
             return;
         }
 
         if (!validatePhone(contact_data.phone)) {
-            updateErrorMsg.textContent = "Invalid phone number. Please enter a 10-digit number.";
+            updateErrorMsg.textContent = "Invalid phone number.";
+            updateErrorMsg.style.display = "block";
             return;
         }
 
         if (!validateEmail(contact_data.email)) {
             updateErrorMsg.textContent = "Invalid email format.";
+            updateErrorMsg.style.display = "block";
             return;
         }
 
