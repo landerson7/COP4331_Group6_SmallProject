@@ -10,6 +10,7 @@ if (!userId) {
 
 let returnedContacts = [];
 let currentContactIndex = 0;
+let HTMLID;
 
 //Initial Render of All Contacts
 
@@ -143,11 +144,28 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 	
     deleteConfirm.addEventListener("click", function () {
+		let info = document.getElementById(HTMLID).getElementsByClassName("contact-info")[0];
+		
+		// Name.
+		let HTMLNameInfo = info.getElementsByClassName("name-row")[0];
+		let HTMLFirstName = HTMLNameInfo.getElementsByClassName("first-name")[0].innerHTML.trim();
+		let HTMLLastName = HTMLNameInfo.getElementsByClassName("last-name")[0].innerHTML.trim();
+		
+		// Phone.
+		let HTMLPhoneInfo = info.getElementsByClassName("phone-row")[0];
+		let HTMLPhone = HTMLPhoneInfo.getElementsByClassName("phone-number")[0].innerHTML.trim();
+		
+		// Email.
+		let HTMLEmailInfo = info.getElementsByClassName("email-row")[0];
+		let HTMLEmail = HTMLEmailInfo.getElementsByClassName("email")[0].innerHTML.trim();
+		
+		console.log(HTMLFirstName+";"+HTMLLastName+";"+HTMLPhone+";"+HTMLEmail);
+		
 		let contact_data = {
-			firstName: document.getElementById("first-name").value.trim(),
-			lastName: document.getElementById("last-name").value.trim(),
-			phone: document.getElementById("phone-number").value.trim(),
-			email: document.getElementById("email").value.trim(),
+			firstName: HTMLFirstName,
+			lastName: HTMLLastName,
+			phone: HTMLPhone,
+			email: HTMLEmail,
 			ID: returnedContacts[currentContactIndex].ID,
 			userId: userId
 		};
@@ -181,10 +199,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				returnedContacts.splice(currentContactIndex, 1);
 				renderContacts();
 				
-				document.getElementById("first-name").value = "";
-				document.getElementById("last-name").value = "";
-				document.getElementById("phone-number").value = "";
-				document.getElementById("email").value = "";
+				selectedContact = null;
+                currentContactIndex = -1;
+    
+                document.querySelectorAll(".contact-card").forEach(card => {
+                    card.classList.remove("selected");
+                });
+				
+				// document.getElementById("first-name").value = "";
+				// document.getElementById("last-name").value = "";
+				// document.getElementById("phone-number").value = "";
+				// document.getElementById("email").value = "";
 				
 				deleteModal.style.display = "none";
 				deleteErrorMsg.textContent = "";
@@ -350,7 +375,8 @@ let selectedContact = null; // Store selected contact details globally
 
 function selectContact(passedId) {
     currentContactIndex = parseInt(passedId.split("-")[2]);
-
+	HTMLID = passedId;
+	
     if (isNaN(currentContactIndex) || currentContactIndex < 0 || currentContactIndex >= returnedContacts.length) {
         console.error("Invalid contact index:", currentContactIndex);
         return;
