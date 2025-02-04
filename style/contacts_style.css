@@ -126,7 +126,41 @@ body {
 .name-row, .phone-row, .email-row {
     margin-bottom: 10px;
     color: white;
-    font-size: 1.25rem;
+
+}
+
+
+/* Media Queries for Font Sizes */
+.name-row, .phone-row, .email-row {
+    font-size: 20px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .name-row, .phone-row, .email-row {
+        font-size: 10px; /* Increase font size for medium devices */
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .name-row, .phone-row, .email-row {
+        font-size: 15px; /* Increase font size for large devices */
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .name-row, .phone-row, .email-row {
+        font-size: 20px; /* Increase font size for extra large devices */
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1500px) {
+    .name-row, .phone-row, .email-row {
+        font-size: 25px; /* Increase font size for extra large devices */
+    }
 }
 
 .name-row span {
