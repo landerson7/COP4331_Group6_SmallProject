@@ -3,13 +3,15 @@
 const userId = localStorage.getItem("userId");
 
 //No userId in browser - re enable for server (disabled for home dev) ----------------------------------------------------------------------------
-// if (!userId) {
-//     alert("You must be logged in to search contacts.");
-//     window.location.href = "index.html"; // Redirect to login page
-// }
+if (!userId) {
+    alert("You must be logged in to search contacts.");
+    window.location.href = "index.html"; // Redirect to login page
+}
 
 let returnedContacts = [];
 let currentContactIndex = 0;
+
+//Initial Render of All Contacts
 
 const contacts = [
     { firstName: "Alice", lastName: "Johnson", phoneNumber: "123-456-7890", email: "alice@example.com" },
@@ -66,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderContacts() {
         const startIndex = (currentPage - 1) * contactsPerPage;
         const endIndex = startIndex + contactsPerPage;
+
+        contactCards.innerHTML = "";
+
         // const currentContacts = contacts.slice(startIndex, endIndex);
         const currentContacts = returnedContacts.slice(startIndex, endIndex);
         let offset = 0;
@@ -90,10 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="last-name">${lastName}</span>
                     </div>
                     <div class="phone-row">
-                        <span class="phone-number">${contact.phoneNumber}</span>
+                        <span class="phone-number">${contact.Phone}</span>
                     </div>
                     <div class="email-row">
-                        <span class="email">${contact.email}</span>
+                        <span class="email">${contact.Email}</span>
                     </div>
                 </div>
             `;
@@ -160,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			return;
 		}
 
-		fetch("deleteContact.php", {
+		fetch("php/deleteContact.php", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(contact_data)
@@ -231,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("createContact.php", {
+        fetch("php/createContact.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(contact_data)
@@ -296,7 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("updateContact.php", {
+        fetch("php/updateContact.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(contact_data)
@@ -373,10 +378,10 @@ function doSearchContact() {
     const userId = localStorage.getItem("userId");
 
     //No userId in browser re enable for server (disabled for home dev) -----------------------------------------------------------------------------------------
-    // if (!userId) {
-    //     alert("You must be logged in to search contacts.");
-    //     return;
-    // }
+    if (!userId) {
+        alert("You must be logged in to search contacts.");
+        return;
+    }
     
 
     //payload
@@ -395,7 +400,7 @@ function doSearchContact() {
 
     
     //url
-	const url = "searchContact.php";
+	const url = "php/searchContact.php";
 
 
     //XML Request made

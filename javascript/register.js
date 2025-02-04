@@ -72,7 +72,7 @@ function register() {
 		password: password,
 	};
 
-	fetch("createAccount.php", {
+	fetch("php/createAccount.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -90,7 +90,7 @@ function register() {
 			alert("Registration successful! Welcome, " + data.firstName + "!");
 			
 			    // Make API Call to login.php after registering
-				fetch('login.php', {
+				fetch('php/login.php', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
