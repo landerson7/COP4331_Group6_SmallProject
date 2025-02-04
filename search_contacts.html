@@ -210,15 +210,15 @@
   <div id="createContactModal" class="modal">
     <div class="modal-content">
         <h2>Create Contact</h2>
-        <p class="error-message" id="error-message"></p>
+        <div class="error-holder"><span class="highlight error-message" id="create-error-message"></span></div>
         <label>First Name:</label>
-        <input type="text" id="contact_firstName">
+        <input type="text" placeholder="First Name" id="contact_firstName">
         <label>Last Name:</label>
-        <input type="text" id="contact_lastName">
+        <input type="text" placeholder="Last Name" id="contact_lastName">
         <label>Phone:</label>
-        <input type="text" id="contact_phone">
+        <input type="text" placeholder="123-456-7890" max-length="12" id="contact_phone">
         <label>Email:</label>
-        <input type="email" id="contact_email">
+        <input type="email" placeholder="this@example.com" id="contact_email">
         <button id="saveContactBtn">Save & Create</button>
         <button id="cancelBtn">Cancel</button>
     </div>
@@ -228,15 +228,15 @@
   <div id="updateContactModal" class="modal">
     <div class="modal-content">
         <h2>Update Contact</h2>
-        <p class="error-message" id="update-error-message"></p>
+        <div class="error-holder"><span class="highlight error-message" id="update-error-message"></span></div>
         <label>First Name:</label>
-        <input type="text" id="update_contact_firstName">
+        <input type="text" placeholder="First Name" id="update_contact_firstName">
         <label>Last Name:</label>
-        <input type="text" id="update_contact_lastName">
+        <input type="text" placeholder="Last Name" id="update_contact_lastName">
         <label>Phone:</label>
-        <input type="text" id="update_contact_phone">
+        <input type="text" placeholder="123-456-7890" max-length="12" id="update_contact_phone">
         <label>Email:</label>
-        <input type="email" id="update_contact_email">
+        <input type="email" placeholder="this@example.com" id="update_contact_email">
         <button id="updateSaveContactBtn">Save & Update</button>
         <button id="updateCancelBtn">Cancel</button>
     </div>

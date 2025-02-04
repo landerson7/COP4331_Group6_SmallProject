@@ -13,6 +13,12 @@ let currentContactIndex = 0;
 let HTMLID;
 
 //Initial Render of All Contacts
+doSearchContact();
+setTimeout(() => {
+    if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+        renderContacts();
+    }
+}, 300); //Delay to give time for search
 
 const contacts = [
     { firstName: "Alice", lastName: "Johnson", phoneNumber: "123-456-7890", email: "alice@example.com" },
@@ -48,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteModal = document.getElementById("deleteContactModal");
     const cancelBtn = document.getElementById("cancelBtn");
     const saveContactBtn = document.getElementById("saveContactBtn");
-    const errorMsg = document.getElementById("error-message");
+    const errorMsg = document.getElementById("create-error-message");
     const deleteErrorMsg = document.getElementById("delete-error-message");
     
     const updateBtn = document.getElementById("update-btn");
@@ -63,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function validatePhone(phone) {
-        return /^\d{10}$/.test(phone); // Simple 10-digit validation
+        return /^\d{3}-\d{3}-\d{4}$/.test(phone); // Simple 10-digit validation
     }
     
     function renderContacts() {
@@ -259,16 +265,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
             errorMsg.textContent = "All fields are required!";
+            errorMsg.style.display = "block";
             return;
         }
 
         if (!validatePhone(contact_data.phone)) {
-            errorMsg.textContent = "Invalid phone number. Please enter a 10-digit number.";
+            errorMsg.textContent = "Invalid phone number.";
+            errorMsg.style.display = "block";
             return;
         }
 
         if (!validateEmail(contact_data.email)) {
             errorMsg.textContent = "Invalid email format.";
+            errorMsg.style.display = "block";
             return;
         }
 
