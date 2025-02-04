@@ -13,10 +13,10 @@
         <!--Input Form-->
         <form class="form">
             <!--Register Form Header-->
-            <div class="register-header">
-                <h2>Contact Stack</h2>
+            <div>
+                <img style="width: 50%; "src="images/breezebook_logo.png" alt="BreezeBook Logo Image">
                 <h2 class="register-prompt">Register</h2>
-                <p class="error-message" id="error-message"></p>
+                <div class="error-holder"><span class="highlight error-message" id="error-message"></span></div>
             </div>
 
             <!--First Name & Last Name in the same row-->
@@ -32,10 +32,10 @@
             <input type="password" placeholder="Password" class="input-box" id="password">
 
             <!--Password Requirements-->
-            <div id="password-requirements" style="font-size: 0.9rem; margin-top: 5px;">
-                <div id="length-req" style="color: red;">&#10060; At least 8 Characters Long</div>
-                <div id="capital-req" style="color: red;">&#10060; At least 1 Capital Letter</div>
-                <div id="special-req" style="color: red;">&#10060; At least 1 Special Character</div>
+            <div id="password-requirements" style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 10px">
+                <div style="color: red; font-weight: bold;"><span id="length-req" class="highlight">&#10060; At least 8 Characters Long</span></div>
+                <div style="color: red; font-weight: bold;"><span id="capital-req" class="highlight">&#10060; At least 1 Capital Letter</span></div>
+                <div style="color: red; font-weight: bold;"><span id="special-req" class="highlight">&#10060; At least 1 Special Character</span></div>
             </div>
 
             <!--Register Button-->

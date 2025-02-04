@@ -1,70 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Contacts</title>
-  <link href="style/contacts_style.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title>Home Contacts Page</title>
+<link href="style/contacts_style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-  <div class="contacts-table">
-    <!-- Top Row -->
-    <div>
-      <div style="border-right: 3px solid black;" class="contacts-cell top-cell">
-        <div class="search-container">
-          <button class="search-btn" id="search-btn">Search</button>
-          <input type="text" class="search-box" id="search-box" placeholder="Search contacts...">
+    
+    <!--Main Container Class Start-->
+    <div class="container">
+        <div class="top-row">
+            <div class="top-left">
+                <div class="search-container">
+                    <button class="search-btn" id="search-btn">Search</button>
+                    <input type="text" class="search-box" id="search-box" placeholder="Search contacts...">
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="button-row">
+                    <button class="btn CRUD" id="create-btn">Create Contact</button>
+                    <button class="btn CRUD" id="update-btn">Update Contact</button>
+                    <button class="btn CRUD" id="delete-btn">Delete Contact</button>
+                </div>
+            </div>
+            
         </div>
-      </div>
-      <div style="border-left: 3px solid black;" class="contacts-cell top-cell" id="contact-name">Contact Info</div>
+
+        <div class="middle-row" id="contact-cards">
+
+            <!-- <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">First Name</span>
+                        <span class="last-name">Last Name</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">Phone Number</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">Email</span>
+                    </div>
+                </div>
+            </div> -->
+            
+            
+
+        </div>
+
+        <div class="bottom-row">
+            <div id="pagination" class="pagination-container">
+                <button id="prev-page" class="btn pagination" disabled>Prev</button>
+                <span class="highlight" id="page-info">Page 1</span>
+                <button id="next-page" class="btn pagination">Next</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Bottom Row -->
-    <div>
-      <div style="border-right: 3px solid black;" class="contacts-cell bottom-cell">
-        <div id="contact-results" class="contact-results">
-          <!-- Contacts will be loaded here -->
-        </div>
-
-        <!-- Pagination -->
-        <div id="pagination" class="pagination-container">
-          <button id="prev-page" class="pagination-btn" disabled>Previous</button>
-          <span id="page-info">Page 1</span>
-          <button id="next-page" class="pagination-btn">Next</button>
-        </div>
-      </div>
-
-      <div style="border-left: 3px solid black;" class="contacts-cell bottom-cell">
-        <div class="contact-info">
-          <label for="first-name">First Name</label>
-          <input style="width: 70%" type="text" id="first-name" disabled>
-
-          <label for="last-name">Last Name</label>
-          <input style="width: 70%" type="text" id="last-name" disabled>
-
-          <label for="phone-number">Phone Number</label>
-          <input style="width: 70%" type="text" id="phone-number" disabled>
-
-          <label for="email">Email</label>
-          <input style="width: 70%" type="email" id="email" disabled>
-
-          <div class="button-row">
-            <button class="btn btn-create" id="create-btn">Create</button>
-            <button class="btn btn-update" id="update-btn">Update</button>
-            <button class="btn btn-delete" id="delete-btn">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button class="btn btn-logout" id="logout-btn" onclick="doLogout()">Log Out</button>
-
-  <!-- Pop-up Modal: Create -->
+    <!-- Pop-up Modal: Create -->
   <div id="createContactModal" class="modal">
     <div class="modal-content">
         <h2>Create Contact</h2>
-		<p class="error-message" id="error-message"></p>
+        <p class="error-message" id="error-message"></p>
         <label>First Name:</label>
         <input type="text" id="contact_firstName">
         <label>Last Name:</label>
@@ -81,8 +226,8 @@
   <!-- Pop-up Modal: Update -->
   <div id="updateContactModal" class="modal">
     <div class="modal-content">
-        <h2>Create Contact</h2>
-		<p class="error-message" id="update-error-message"></p>
+        <h2>Update Contact</h2>
+        <p class="error-message" id="update-error-message"></p>
         <label>First Name:</label>
         <input type="text" id="update_contact_firstName">
         <label>Last Name:</label>
@@ -100,13 +245,15 @@
   <div id="deleteContactModal" class="modal">
     <div class="modal-content">
         <h2>Are you sure you want to delete this contact?</h2>
-		<p class="error-message" id="delete-error-message"></p>
+        <p class="error-message" id="delete-error-message"></p>
         <button id="deleteConfirm">Delete</button>
         <button id="deleteCancel">Cancel</button>
     </div>
   </div>
 
-  <!-- Link to External JavaScript -->
-  <script src="javascript/search_contacts.js"></script>
+    <button class="btn logout" id="logout-btn" onclick="doLogout()">Log Out</button>
+    
+    <!--JavaScript-->
+    <script src="javascript/search_contacts.js"></script>
 </body>
 </html>

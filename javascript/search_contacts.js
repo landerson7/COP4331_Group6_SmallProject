@@ -2,35 +2,37 @@
 //Get userId from browser
 const userId = localStorage.getItem("userId");
 
-//No userId in browser
-if (!userId) {
-    alert("You must be logged in to search contacts.");
-    window.location.href = "login.html"; // Redirect to login page
-}
+//No userId in browser - re enable for server (disabled for home dev) ----------------------------------------------------------------------------
+// if (!userId) {
+//     alert("You must be logged in to search contacts.");
+//     window.location.href = "index.html"; // Redirect to login page
+// }
 
 let returnedContacts = [];
 let currentContactIndex = 0;
 
 const contacts = [
-    { firstName: "Alice", lastName: "Johnson", phoneNumber: "1234567890", email: "alice@example.com" },
-    { firstName: "Bob", lastName: "Smith", phoneNumber: "9876543210", email: "bob@example.com" },
-    { firstName: "Charlie", lastName: "Davis", phoneNumber: "4561237890", email: "charlie@example.com" },
-    { firstName: "David", lastName: "Wilson", phoneNumber: "3216549870", email: "david@example.com" },
-    { firstName: "Emma", lastName: "Brown", phoneNumber: "7418529630", email: "emma@example.com" },
-    { firstName: "Frank", lastName: "Green", phoneNumber: "8529637410", email: "frank@example.com" },
-    { firstName: "Grace", lastName: "Taylor", phoneNumber: "3692581470", email: "grace@example.com" },
-    { firstName: "Hank", lastName: "White", phoneNumber: "1597534860", email: "hank@example.com" },
-    { firstName: "Ivy", lastName: "Martinez", phoneNumber: "6547891230", email: "ivy@example.com" },
-    { firstName: "Jack", lastName: "Lee", phoneNumber: "7539514560", email: "jack@example.com" },
-    { firstName: "Jack", lastName: "Black", phoneNumber: "8524561230", email: "jackblack@example.com" },
-    { firstName: "Black", lastName: "Jack", phoneNumber: "9513572580", email: "blackjack@example.com" }
+    { firstName: "Alice", lastName: "Johnson", phoneNumber: "123-456-7890", email: "alice@example.com" },
+    { firstName: "Bob", lastName: "Smith", phoneNumber: "987-654-3210", email: "bob@example.com" },
+    { firstName: "Charlie", lastName: "Davis", phoneNumber: "456-123-7890", email: "charlie@example.com" },
+    { firstName: "David", lastName: "Wilson", phoneNumber: "321-654-9870", email: "david@example.com" },
+    { firstName: "Emma", lastName: "Brown", phoneNumber: "741-852-9630", email: "emma@example.com" },
+    { firstName: "Frank", lastName: "Green", phoneNumber: "852-963-7410", email: "frank@example.com" },
+    { firstName: "Grace", lastName: "Taylor", phoneNumber: "369-258-1470", email: "grace@example.com" },
+    { firstName: "Hank", lastName: "White", phoneNumber: "159-753-4860", email: "hank@example.com" },
+    { firstName: "Ivy", lastName: "Martinez", phoneNumber: "654-789-1230", email: "ivy@example.com" },
+    { firstName: "Jack", lastName: "Lee", phoneNumber: "753-951-4560", email: "jack@example.com" },
+    { firstName: "Jack", lastName: "Black", phoneNumber: "852-456-1230", email: "jackblack@example.com" },
+    { firstName: "Black", lastName: "Jack", phoneNumber: "951-357-2580", email: "blackjack@example.com" }
 ]; // Example data, replace with actual fetched contacts
 	
+// returnedContacts = contacts; //uncomment to use constant array as returned contacts (local use) --------------------------------------
+
 document.addEventListener("DOMContentLoaded", function () {
-    const contactsPerPage = 5;
+    const contactsPerPage = 9;
     let currentPage = 1;
 
-    const contactResults = document.getElementById("contact-results");
+    const contactCards = document.getElementById("contact-cards");
     const prevPageBtn = document.getElementById("prev-page");
     const nextPageBtn = document.getElementById("next-page");
     const pageInfo = document.getElementById("page-info");
@@ -62,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     function renderContacts() {
-        contactResults.innerHTML = "";
         const startIndex = (currentPage - 1) * contactsPerPage;
         const endIndex = startIndex + contactsPerPage;
         // const currentContacts = contacts.slice(startIndex, endIndex);
@@ -70,21 +71,34 @@ document.addEventListener("DOMContentLoaded", function () {
         let offset = 0;
         currentContacts.forEach(contact => {
             const contactBox = document.createElement("div");
-            contactBox.classList.add("contact-box");
-            contactBox.setAttribute("id", "contact-box-"+(startIndex+offset));
+            contactBox.classList.add("contact-card");
+            contactBox.setAttribute("id", "contact-box-" + (startIndex + offset));
             contactBox.setAttribute("onclick", "populateContactFields(id)");
 
-			// A contact from the client-side global array.
-			if (contact.FirstName === undefined) {
-				contactBox.innerText = `${contact.firstName} ${contact.lastName}`;
-			}
-			
-			// A contact returned from the API.
-			else {
-				contactBox.innerText = `${contact.FirstName} ${contact.LastName}`;
-			}
-            
-            contactResults.appendChild(contactBox);
+            // Determine the contact's first and last name
+            const firstName = contact.FirstName === undefined ? contact.firstName : contact.FirstName;
+            const lastName = contact.LastName === undefined ? contact.lastName : contact.LastName;
+
+            // Set the inner HTML of the contactBox
+            contactBox.innerHTML = `
+                <div class="contact-image">
+                    <img style="border-radius: 20px;" src="images/contact_icon.jpeg" alt="Contact Icon Depiction of Palm Tree">
+                </div>
+                <div class="contact-info">
+                    <div class="name-row">
+                        <span class="first-name">${firstName}</span>
+                        <span class="last-name">${lastName}</span>
+                    </div>
+                    <div class="phone-row">
+                        <span class="phone-number">${contact.phoneNumber}</span>
+                    </div>
+                    <div class="email-row">
+                        <span class="email">${contact.email}</span>
+                    </div>
+                </div>
+            `;
+
+            contactCards.appendChild(contactBox);
             offset += 1;
         });
         pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(returnedContacts.length / contactsPerPage)}`;
@@ -358,11 +372,11 @@ function doSearchContact() {
     //Get userId from browser
     const userId = localStorage.getItem("userId");
 
-    //No userId in browser
-    if (!userId) {
-        alert("You must be logged in to search contacts.");
-        return;
-    }
+    //No userId in browser re enable for server (disabled for home dev) -----------------------------------------------------------------------------------------
+    // if (!userId) {
+    //     alert("You must be logged in to search contacts.");
+    //     return;
+    // }
     
 
     //payload
