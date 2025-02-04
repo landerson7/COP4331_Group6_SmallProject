@@ -139,6 +139,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
 	
     deleteBtn.addEventListener("click", function() {
+        if (!selectedContact) {
+            updateErrorMsg.textContent = "No contact selected.";
+            return;
+        }
 		deleteModal.style.display = "flex";
         deleteErrorMsg.textContent = "";
 	});
