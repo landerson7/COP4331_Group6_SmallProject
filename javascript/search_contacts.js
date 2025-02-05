@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div id="noContacts" class="highlight no-contacts">No Contacts Found</div>
             </div>
             `
+            noContacts = document.getElementById("noContacts");
             noContacts.style.display = "block";
             return;
         }
