@@ -73,6 +73,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // const currentContacts = contacts.slice(startIndex, endIndex);
         const currentContacts = returnedContacts.slice(startIndex, endIndex);
         let offset = 0;
+
+        //Sorting alphabetically
+        currentContacts.sort((a, b) => {
+            if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
+                return -1;
+            }
+            if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
+                return 1;
+            }
+            return 0;
+        });
+
+        //Rendering contacts
         currentContacts.forEach(contact => {
             const contactBox = document.createElement("div");
             contactBox.classList.add("contact-card");
