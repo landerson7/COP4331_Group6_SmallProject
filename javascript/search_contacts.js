@@ -486,8 +486,8 @@ function doSearchContact() {
                             if (nameA < nameB) return -1;
                             if (nameA > nameB) return 1;
 
-                            const lastNameA = a.FastName.toLowerCase();
-                            const lastNameB = b.FastName.toLowerCase();
+                            const lastNameA = a.LastName.toLowerCase();
+                            const lastNameB = b.LastName.toLowerCase();
                             if (lastNameA < lastNameB) return -1;
                             if (lastNameA > lastNameB) return 1;
 
