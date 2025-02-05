@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const updateSaveContactBtn = document.getElementById("updateSaveContactBtn");
     const updateErrorMsg = document.getElementById("update-error-message");
     const noContacts = document.getElementById("noContacts");
-    
 
     function validateEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -69,6 +68,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //No contacts to render
         if (returnedContacts.length == 0) {
+            contactCards.innerHTML = `
+            <div class="middle-row" id="contact-cards">
+                <div id="noContacts" class="highlight no-contacts">No Contacts Found</div>
+            </div>
+            `
             noContacts.style.display = "block";
             return;
         }
@@ -222,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				
 				deleteModal.style.display = "none";
 				deleteErrorMsg.textContent = "";
-                
+
                 renderContacts();
 			}
 		})
