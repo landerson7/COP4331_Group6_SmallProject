@@ -285,6 +285,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("contact_lastName").value = "";
                 document.getElementById("contact_phone").value = "";
                 document.getElementById("contact_email").value = "";
+
+                //Adding info and re-rendering Contacts
+                returnedContacts.push(contact_data);
+                returnedContacts = alphaSortContacts(returnedContacts);
+                renderContacts();
             }
         })
         .catch(error => {
@@ -466,19 +471,7 @@ function doSearchContact() {
                     if (response.contacts && response.contacts.length > 0) {
                         returnedContacts = response.contacts;
 
-                        returnedContacts.sort((a, b) => {
-                            const nameA = a.FirstName.toLowerCase();
-                            const nameB = b.FirstName.toLowerCase();
-                            if (nameA < nameB) return -1;
-                            if (nameA > nameB) return 1;
-
-                            const lastNameA = a.LastName.toLowerCase();
-                            const lastNameB = b.LastName.toLowerCase();
-                            if (lastNameA < lastNameB) return -1;
-                            if (lastNameA > lastNameB) return 1;
-
-                            return 0;
-                        });
+                        returnedContacts = alphaSortContacts(returnedContacts);
 
                     } else { // no results found
                         returnedContacts = [];
@@ -509,5 +502,24 @@ function displayNoResultsMessage() {
     messageDiv.className = "no-results";
     messageDiv.textContent = "No contacts found.";
     resultsContainer.appendChild(messageDiv);
+}
+
+//Alphabetically sort contacts to render
+function alphaSortContacts(returnedContacts) {
+    returnedContacts.sort((a, b) => {
+        const nameA = a.FirstName.toLowerCase();
+        const nameB = b.FirstName.toLowerCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+
+        const lastNameA = a.LastName.toLowerCase();
+        const lastNameB = b.LastName.toLowerCase();
+        if (lastNameA < lastNameB) return -1;
+        if (lastNameA > lastNameB) return 1;
+
+        return 0;
+    });
+
+    return returnedContacts
 }
 
