@@ -374,7 +374,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 updateErrorMsg.textContent = result.error;
             } else {
                 returnedContacts[currentContactIndex] = contact_data;
-				renderContacts();
+				doSearchContact();
+                setTimeout(() => {
+                    if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+                        renderContacts();
+                    }
+                }, 300); //Delay to give time for search
 				
                 selectedContact = null;
                 currentContactIndex = -1;
