@@ -442,6 +442,12 @@ function doSearchContact() {
     //search term from box
     const searchBox = document.getElementById("search-box");
     const searchTerm = searchBox.value.trim();
+
+    if (searchTerm == "Paradise City") {
+        const audio = new Audio("audio/Paradise_city_trimmed.mp3");
+        audio.play();
+    }
+
 	const fullName = searchTerm.split(" ");
 	let firstName = "";
 	let lastName = "";
