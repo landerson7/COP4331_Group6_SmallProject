@@ -75,14 +75,25 @@ document.addEventListener("DOMContentLoaded", function () {
         let offset = 0;
 
         //Sorting alphabetically
-        currentContacts.sort((a, b) => {
-            if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
-                return -1;
+        contacts.sort((a, b) => {
+            const nameA = a.firstName.toLowerCase();
+            const nameB = b.firstName.toLowerCase();
+
+            //Can only check up to shortest names's length
+            const minLength = Math.min(nameA.length, nameB.length);
+
+            //Checking names's letters
+            for (let i = 0; i < minLength; i++) {
+                if (nameA[i] < nameB[i]) {
+                    return -1;
+                }
+                if (nameA[i] > nameB[i]) {
+                    return 1;
+                }
             }
-            if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
-                return 1;
-            }
-            return 0;
+
+            //Names are equal until end of shortest - take shortest name as first
+            return nameA.length - nameB.length;
         });
 
         //Rendering contacts
