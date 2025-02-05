@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     returnedContacts = [];
                 else
 				    returnedContacts.splice(currentContactIndex, 1);
-                
+
 				renderContacts();
 				
 				selectedContact = null;
@@ -495,7 +495,8 @@ function doSearchContact() {
 
                     } else { // no results found
                         returnedContacts = [];
-                        displayNoResultsMessage();
+                        renderContacts();
+
                     }
                 } catch (err) {
                     console.error("Error parsing response:", err);
@@ -515,7 +516,7 @@ function displayNoResultsMessage() {
     const resultsContainer = document.getElementById("contact-results");
 
     // Clear previous results
-    resultsContainer.innerHTML = "";
+    resultsContainer.text = "";
 
     // Display message
     const messageDiv = document.createElement("div");
