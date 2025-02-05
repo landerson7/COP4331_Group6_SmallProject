@@ -74,28 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentContacts = returnedContacts.slice(startIndex, endIndex);
         let offset = 0;
 
-        //Sorting alphabetically
-        currentContacts.sort((a, b) => {
-            const nameA = a.firstName.toLowerCase();
-            const nameB = b.firstName.toLowerCase();
-
-            //Can only check up to shortest names's length
-            const minLength = Math.min(nameA.length, nameB.length);
-
-            //Checking names's letters
-            for (let i = 0; i < minLength; i++) {
-                if (nameA[i] < nameB[i]) {
-                    return -1;
-                }
-                if (nameA[i] > nameB[i]) {
-                    return 1;
-                }
-            }
-
-            //Names are equal until end of shortest - take shortest name as first
-            return nameA.length - nameB.length;
-        });
-
         //Rendering contacts
         currentContacts.forEach(contact => {
             const contactBox = document.createElement("div");
@@ -501,6 +479,21 @@ function doSearchContact() {
                     console.log(response);
                     if (response.contacts && response.contacts.length > 0) {
                         returnedContacts = response.contacts;
+
+                        returnedContacts.sort((a, b) => {
+                            const nameA = a.FirstName.toLowerCase();
+                            const nameB = b.FirstName.toLowerCase();
+                            if (nameA < nameB) return -1;
+                            if (nameA > nameB) return 1;
+
+                            const lastNameA = a.FastName.toLowerCase();
+                            const lastNameB = b.FastName.toLowerCase();
+                            if (lastNameA < lastNameB) return -1;
+                            if (lastNameA > lastNameB) return 1;
+
+                            return 0;
+                        });
+
                     } else { // no results found
                         returnedContacts = [];
                         displayNoResultsMessage();
