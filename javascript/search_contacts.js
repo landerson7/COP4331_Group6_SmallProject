@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let offset = 0;
 
         //Sorting alphabetically
-        contacts.sort((a, b) => {
+        currentContacts.sort((a, b) => {
             const nameA = a.firstName.toLowerCase();
             const nameB = b.firstName.toLowerCase();
 
