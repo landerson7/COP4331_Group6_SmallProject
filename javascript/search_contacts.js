@@ -207,7 +207,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				deleteErrorMsg.textContent = result.error;
 			} else {
 				// Delete element from the global array.
-				returnedContacts.splice(currentContactIndex, 1);
+
+                if (returnedContacts.length == 1)
+                    returnedContacts = [];
+                else
+				    returnedContacts.splice(currentContactIndex, 1);
+                
 				renderContacts();
 				
 				selectedContact = null;
