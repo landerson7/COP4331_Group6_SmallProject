@@ -495,7 +495,6 @@ function doSearchContact() {
 
                     } else { // no results found
                         returnedContacts = [];
-                        renderContacts();
 
                     }
                 } catch (err) {
