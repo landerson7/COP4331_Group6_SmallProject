@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const updateCancelBtn = document.getElementById("updateCancelBtn");
     const updateSaveContactBtn = document.getElementById("updateSaveContactBtn");
     const updateErrorMsg = document.getElementById("update-error-message");
+    const noContacts = document.getElementById("noContacts");
     
 
     function validateEmail(email) {
@@ -65,6 +66,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     function renderContacts() {
+
+        //No contacts to render
+        if (returnedContacts.length == 0) {
+            noContacts.style.display = "block";
+            return;
+        }
+        else {
+            noContacts.style.display = "none";
+        }
+
         const startIndex = (currentPage - 1) * contactsPerPage;
         const endIndex = startIndex + contactsPerPage;
 
@@ -117,9 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
     //Initial Render of All Contacts
     doSearchContact();
     setTimeout(() => {
-        if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+        // if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
             renderContacts();
-        }
+        // }
     }, 300); //Delay to give time for search
 	
     prevPageBtn.addEventListener("click", function () {
@@ -139,9 +150,9 @@ document.addEventListener("DOMContentLoaded", function () {
     searchBtn.addEventListener("click", function() {
         doSearchContact();
         setTimeout(() => {
-            if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+            // if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
                 renderContacts();
-            }
+            // }
         }, 300); //Delay to give time for search
     });
     
@@ -205,11 +216,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelectorAll(".contact-card").forEach(card => {
                     card.classList.remove("selected");
                 });
-				
-				// document.getElementById("first-name").value = "";
-				// document.getElementById("last-name").value = "";
-				// document.getElementById("phone-number").value = "";
-				// document.getElementById("email").value = "";
 				
 				deleteModal.style.display = "none";
 				deleteErrorMsg.textContent = "";
@@ -287,9 +293,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("contact_email").value = "";
 
                 //Adding info and re-rendering Contacts
-                returnedContacts.push(contact_data);
-                returnedContacts = alphaSortContacts(returnedContacts);
-                renderContacts();
+                //Initial Render of All Contacts
+                doSearchContact();
+                setTimeout(() => {
+                    // if (returnedContacts.length > 0) {  //Check if contacts exist before rendering
+                        renderContacts();
+                    // }
+                }, 300); //Delay to give time for search
             }
         })
         .catch(error => {
