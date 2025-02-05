@@ -339,3 +339,13 @@ body {
     font-weight: bold;
     width: 100%;
 }
+
+.fixed-image {
+    width: 20%;
+    position: absolute;
+    top: 7.5%;
+    left: 50%;
+    z-index: 1; /* Ensure the image is above other content */
+    transform: translate(-50%, -50%);
+    
+}

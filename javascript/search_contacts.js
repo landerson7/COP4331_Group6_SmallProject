@@ -212,8 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     returnedContacts = [];
                 else
 				    returnedContacts.splice(currentContactIndex, 1);
-
-				renderContacts();
 				
 				selectedContact = null;
                 currentContactIndex = -1;
@@ -224,6 +222,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				
 				deleteModal.style.display = "none";
 				deleteErrorMsg.textContent = "";
+                
+                renderContacts();
 			}
 		})
 		.catch(error => {
