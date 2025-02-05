@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const updateCancelBtn = document.getElementById("updateCancelBtn");
     const updateSaveContactBtn = document.getElementById("updateSaveContactBtn");
     const updateErrorMsg = document.getElementById("update-error-message");
-    const noContacts = document.getElementById("noContacts");
+    let noContacts = document.getElementById("noContacts");
 
     function validateEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
