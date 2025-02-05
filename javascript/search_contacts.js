@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		let HTMLEmailInfo = info.getElementsByClassName("email-row")[0];
 		let HTMLEmail = HTMLEmailInfo.getElementsByClassName("email")[0].innerHTML.trim();
 		
-		console.log(HTMLFirstName+";"+HTMLLastName+";"+HTMLPhone+";"+HTMLEmail);
+		// console.log(HTMLFirstName+";"+HTMLLastName+";"+HTMLPhone+";"+HTMLEmail);
 		
 		let contact_data = {
 			firstName: HTMLFirstName,
@@ -184,21 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			ID: returnedContacts[currentContactIndex].ID,
 			userId: userId
 		};
-		
-		if (!contact_data.firstName || !contact_data.lastName || !contact_data.phone || !contact_data.email) {
-				deleteErrorMsg.textContent = "All fields are required!";
-				return;
-			}
-
-		if (!validatePhone(contact_data.phone)) {
-			deleteErrorMsg.textContent = "Invalid phone number. Please enter a 10-digit number.";
-			return;
-		}
-
-		if (!validateEmail(contact_data.email)) {
-			deleteErrorMsg.textContent = "Invalid email format.";
-			return;
-		}
 
 		fetch("php/deleteContact.php", {
 			method: "POST",
@@ -238,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	
     deleteCancel.addEventListener("click", function() {
 		deleteModal.style.display = "none";
+        deleteErrorMsg.textContent = "";
 	});
     
     createBtn.addEventListener("click", function () {
